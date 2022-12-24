@@ -1,0 +1,44 @@
+
+.css-1g9elgk {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    border-radius: 10px;
+}
+
+.PopUpFormDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.PopUpFormDiv form input{
+    border: none;
+    border-bottom: 1px solid black;
+}
+.PopUpFormDiv form{
+    /* height: 200px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.PopUpFormDiv input{
+    height: 20px;
+}
+
+.PopUpFormDiv button{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    padding: 8px 15px 8px 15px;
+    background-color: var(--color4);
+    border-radius: 10px;
+    color: var(--color1);
+} 

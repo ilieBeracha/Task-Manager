@@ -1,0 +1,140 @@
+.Tasks {
+	width: 92%;
+    min-height: 100%;
+}
+.TasksHeader{
+    position: relative;
+    width: 100%;
+    height: 20%;
+    /* background-color: var(--color3); */
+    box-sizing: border-box;
+    border-bottom: 2px solid var(--color4);
+}
+.TasksList{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.TasksDiv{
+    /* min-width: 380px; */
+    min-width: 30%;
+    /* overflow-y: scroll; */
+    height: 95%;
+    border-radius: 5px;
+    /* border: 1px solid var(--color3); */
+    /* overflow-y: scroll; */
+    /* background-color: aliceblue; */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    
+}
+
+.TasksDivTitle{
+    display: flex;
+    justify-content: center;
+    color: var(--color3);
+    align-items: center;
+    width: 80%;
+    height: 5%;
+    margin: 0 auto;
+}
+
+.TasksHeader {
+    position: relative;
+    width: 100%;
+    height: 20%;
+    box-sizing: border-box;
+    border-bottom: 2px solid var(--color4);
+    display: flex;
+    align-items: center;
+  }
+  
+  .TasksHeader .search-container {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .TasksHeader .search-container input[type="text"] {
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px 0 0 5px;
+  }
+  
+  .TasksHeader .search-container button[type="submit"] {
+    border: none;
+    outline: none;
+    background-color: var(--color3);
+    color: #fff;
+    font-size: 1em;
+    padding: 10px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .TasksHeader .search-container button[type="submit"]:hover {
+    background-color: #333;
+  }
+  
+  .TasksHeader .search-container button[type="submit"]:active {
+    background-color: #666;
+  }
+  
+
+.TasksDivTitle h5{
+    
+    margin: 0;
+}
+
+.TasksDisplayed{
+    /* padding-left: 20px; */
+    width: 100%;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+
+    .TasksList{
+        /* height: 80%; */
+        width: 100%;
+    }
+    .TasksDiv{
+        padding-left: 10px;
+        min-width: 90%;
+        height: 30%;
+    }
+
+    .TasksDivTitle{
+        height: 30px;
+    }
+
+    .TasksDisplayed{
+        padding-left: 20px;
+        gap: 20px;
+        margin: 0;
+        padding: 0;
+        /* padding-top: 10px; */
+        flex-direction: row;
+        justify-content:flex-start;
+        display: flex;
+        align-items: center;
+        overflow-y :none;
+        overflow-x: scroll;
+    }
+    
+
+
+}

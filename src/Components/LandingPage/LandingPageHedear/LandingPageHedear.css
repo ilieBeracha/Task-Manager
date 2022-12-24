@@ -1,0 +1,35 @@
+.LandingPageHedear {
+	width: 100%;
+    height: 8%;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    /* padding-left: 50px; */
+    /* padding-right: 50px; */
+}
+
+.landingPageHeaderIcon{
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.LandingPageHedearLoginOrRegister{
+    min-width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.LandingPageHedearLoginOrRegister button{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    padding: 8px 15px 8px 15px;
+    
+}
+

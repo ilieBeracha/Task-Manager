@@ -1,0 +1,96 @@
+.Task {
+  position: relative;
+  width: 60%;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* align-items: center; */
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  padding-right: 35px;
+  padding-bottom: 30px;
+  padding-left: 15px;
+  padding-top: 15px;
+  font-family: 'Roboto', sans-serif;
+  transition: box-shadow 0.2s ease-in-out;
+  
+}
+
+.Task:hover {
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.TaskName {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.TaskContent {
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+.TaskDate {
+  font-size: 0.8em;
+  color: gray;
+}
+
+.Task h5 {
+  margin: 0;
+}
+
+.eraseTaskDiv,
+.editTaskDiv {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.eraseTaskDiv {
+  top: 5px;
+}
+
+.editTaskDiv {
+  top: 30px;
+}
+
+.eraseTaskDiv:hover,
+.editTaskDiv:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.eraseTaskDiv:active,
+.editTaskDiv:active {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 700px) {
+  .Task {
+    min-width: 40%;
+    max-width: 40%;
+    height: 130px;
+    margin: 0;
+  }
+
+  .eraseTaskDiv{
+    /* margin: 5px; */
+  }
+}
+@media screen and (max-width: 768px) {
+  .Task {
+    width: 150px;
+    height: 130px;
+    margin: 0;
+  }
+
+  .eraseTaskDiv{
+    /* margin: 5px; */
+  }
+}
