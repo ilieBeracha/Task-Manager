@@ -72,8 +72,8 @@
 }
 
 @media screen and (max-width: 700px) {
-
     .Navbar {
+        display: none;
         max-width: 8%;
         min-width: 10px;
     }

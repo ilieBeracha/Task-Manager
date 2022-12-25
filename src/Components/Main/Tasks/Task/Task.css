@@ -73,8 +73,7 @@
 @media screen and (max-width: 700px) {
   .Task {
     min-width: 40%;
-    max-width: 40%;
-    height: 130px;
+    /* height: 100px; */
     margin: 0;
   }
 
@@ -85,7 +84,7 @@
 @media screen and (max-width: 768px) {
   .Task {
     width: 150px;
-    height: 130px;
+    /* height: 130px; */
     margin: 0;
   }
 

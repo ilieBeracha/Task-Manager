@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 function LandingPage(): JSX.Element {
     const [titleDisplayed, setTitleDisplayed] = useState<[]>([])
-    let title: any = ['G', 'e', 't', ' ', 'o', 'r', 'g', 'a', 'n', 'i', 'z', 'e', 'd', ' ', 'g', 'e', 't', ' ', 't', 'h', 'i', 'n', 'g', 's', ' ', 'd', 'o', 'n', 'e', '.',];
+    let title: any = ['G', 'e', 't', ' ', 'o', 'r', 'g', 'a', 'n', 'i', 'z', 'e', 'd', ', ', 'g', 'e', 't', ' ', 't', 'h', 'i', 'n', 'g', 's', ' ', 'd', 'o', 'n', 'e', '.',];
 
     // useEffect(() => {
     //     getSingleLetter()
@@ -17,13 +17,13 @@ function LandingPage(): JSX.Element {
     //     let i = 0;
 
     //     let interval = setInterval(() => {
+    //         newTitle.concat(title[i]);
     //         setTitleDisplayed(newTitle);
-    //         newTitle.push(title[i]);
     //         console.log(newTitle)
     //         i++;
             
     //         if (i >= title.length) {
-    //             clearInterval(interval);
+    //             // getSingleLetter()
     //         }
     //     }, 500);
     // }
