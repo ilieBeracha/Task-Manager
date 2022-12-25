@@ -16,7 +16,6 @@ function Task({ task = {} as TaskModel, index }: { task: TaskModel, index: numbe
     }
 
     async function editTask() {
-        console.log(1);
         console.log(index)
 
     }

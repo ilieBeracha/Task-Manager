@@ -9,8 +9,6 @@ import { apiService } from '../../../../Service/ApiService';
 import { getIdJwt } from '../../../../Service/getIdJwt';
 import './AddTask.css'
 
-
-
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -22,7 +20,7 @@ const style = {
     p: 4,
 };
 
-function AddTask() {
+function AddTask({ refreshTasks, setRefreshTasks }: any) {
     const { register, handleSubmit, formState: { errors } } = useForm<TaskModel>();
     const loginSelector = useSelector((state: any) => state.logged);
     const dispatch = useDispatch();
@@ -32,8 +30,9 @@ function AddTask() {
 
 
     async function saveTask(task: TaskModel) {
-        handleClose()
-        const sub =await getIdJwt()
+        setRefreshTasks(!refreshTasks)
+        handleClose();
+        const sub = await getIdJwt()
         await apiService.AddNewTask(sub, task).catch(e => console.log(e));
     }
 

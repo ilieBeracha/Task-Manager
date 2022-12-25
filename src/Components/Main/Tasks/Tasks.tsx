@@ -11,20 +11,24 @@ import { Droppable, DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 function Tasks(): JSX.Element {
     const [tasks, setTasks] = useState<TaskModel[]>([]);
-
     const [todo, setTodo] = useState<TaskModel[]>([])
     const [inProgress, setInProgress] = useState<TaskModel[]>([])
     const [completed, setCompleted] = useState<TaskModel[]>([])
 
+    const [refreshTasks, setRefreshTasks] = useState<boolean>(false);
+
 
     useEffect(() => {
         getTasks()
-    }, []);
+    }, [refreshTasks]);
+
 
     async function getTasks() {
         const sub = await getIdJwt();
         let results = await apiService.getTasks(sub)
         const jsonResults: any = await results.json();
+        setTasks([...jsonResults]);
+
         const todoTasks = jsonResults.filter((res: any) => res.taskStatus === "todo");
         setTodo(todoTasks);
 
@@ -33,8 +37,6 @@ function Tasks(): JSX.Element {
 
         const completedTasks = jsonResults.filter((res: any) => res.taskStatus === "completed");
         setCompleted(completedTasks);
-
-        setTasks([...todoTasks, ...inProgressTasks, ...completedTasks]);
     }
 
 
@@ -99,10 +101,11 @@ function Tasks(): JSX.Element {
         await apiService.updateTask(sub, task);
     }
 
+
     return (
         <div className="Tasks">
             <div className="TasksHeader">
-                <AddTask />
+                <AddTask setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks}/>
                 <div className="search-container">
                     <input onChange={(e) => searchTasks(e)} type="text" placeholder="Search tasks..." />
                     <button type="submit">Search</button>
