@@ -45,9 +45,14 @@ function Tasks(): JSX.Element {
         if (event.target.value === '') {
             await getTasks();
         } else {
-            setTasks(tasks.filter((t) => t.taskName.includes(event.target.value)));
+            const searchResults = tasks.filter((t) => (t.taskName).toLocaleLowerCase().includes((event.target.value).toLocaleLowerCase()) || (t.taskContent).toLocaleLowerCase().includes((event.target.value).toLocaleLowerCase()));
+            setTasks(searchResults);
+            setTodo(searchResults.filter((res: any) => res.taskStatus === "todo"));
+            setInProgress(searchResults.filter((res: any) => res.taskStatus === "inProgress"));
+            setCompleted(searchResults.filter((res: any) => res.taskStatus === "completed"));
         }
     }
+
 
     function onDragEnd(result: DropResult) {
         const { source, destination } = result;
@@ -97,7 +102,6 @@ function Tasks(): JSX.Element {
     async function updateTask(task: TaskModel, newStatus: string) {
         const sub = await getIdJwt();
         task.taskStatus = newStatus;
-        console.log(task)
         await apiService.updateTask(sub, task);
     }
 
@@ -105,7 +109,7 @@ function Tasks(): JSX.Element {
     return (
         <div className="Tasks">
             <div className="TasksHeader">
-                <AddTask setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks}/>
+                <AddTask setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} />
                 <div className="search-container">
                     <input onChange={(e) => searchTasks(e)} type="text" placeholder="Search tasks..." />
                     <button type="submit">Search</button>
@@ -119,13 +123,16 @@ function Tasks(): JSX.Element {
                             (provided) => (
                                 <div className="TasksDiv TasksTodo" ref={provided.innerRef} {...provided.droppableProps}>
                                     <div className="TasksDivTitle">
-                                        <h5>ToDo</h5>
+                                        <h5>To Do</h5>
                                     </div>
 
                                     <div className="TasksDisplayed TasksTodoDiv">
-                                        {todo ?
-                                            todo.map((t, index) => <Task index={index} key={t.taskId} task={t} />)
-                                            : <></>}
+                                        {todo.length < 5 ?
+                                            todo.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.taskId} task={t} />)
+                                            : <div className="TasksDisplayed TasksDisplayedOver3">
+                                                {todo.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.taskId} task={t} />)}
+
+                                            </div>}
                                         {provided.placeholder}
                                     </div>
                                 </div>
@@ -143,9 +150,11 @@ function Tasks(): JSX.Element {
 
                                     <div className="TasksDisplayed TaksInProgressDiv">
                                         {
-                                            inProgress ?
-                                                inProgress.map((t, index) => <Task index={index} key={t.taskId} task={t} />)
-                                                : <></>}
+                                            inProgress.length < 5 ?
+                                                inProgress.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.taskId} task={t} />)
+                                                : <div className="TasksDisplayed TasksDisplayedOver3">
+                                                    {inProgress.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.taskId} task={t} />)}
+                                                </div>}
                                         {provided.placeholder}
                                     </div>
 
@@ -163,9 +172,11 @@ function Tasks(): JSX.Element {
                                     </div>
 
                                     <div className="TasksDisplayed TasksCompletedDiv">
-                                        {completed ?
-                                            completed.map((t, index) => <Task index={index} key={t.taskId} task={t} />)
-                                            : <></>}
+                                        {completed.length<5 ?
+                                            completed.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.taskId} task={t} />)
+                                            : <div className="TasksDisplayed TasksDisplayedOver3">
+                                                {completed.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.taskId} task={t} />)}
+                                            </div>}
                                         {provided.placeholder}
                                     </div>
                                 </div>

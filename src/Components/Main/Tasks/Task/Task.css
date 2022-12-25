@@ -1,7 +1,7 @@
 .Task {
   position: relative;
   width: 60%;
-  height: 120px;
+  min-height: 110px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -12,12 +12,11 @@
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
   padding-right: 35px;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
   padding-left: 15px;
   padding-top: 15px;
   font-family: 'Roboto', sans-serif;
   transition: box-shadow 0.2s ease-in-out;
-  
 }
 
 .Task:hover {

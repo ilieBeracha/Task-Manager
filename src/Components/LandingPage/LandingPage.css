@@ -2,4 +2,72 @@
 	width: 100%;
     height: 100%;
     background-color: var(--color1);
+    /* display: flex; */
+}
+
+.LandingPageContent{
+    width: 30%;
+    height: 92%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+
+.LandingPageContent h1{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#TaskManagerTitle{
+    color: var(--color4);
+}
+
+.LandingPageContentImage img{
+    max-width: 700px;
+}
+
+.LandingPageAll{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin:  0 auto;
+}
+
+.LandingPageBtns{
+    width: max-content;
+}
+
+.LandingPageBtns button{
+    cursor: pointer;
+    background-color: var(--color4);
+    border: none;
+    padding: 10px;
+
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+}
+
+
+
+@media screen and (max-width: 1200px) {
+    .LandingPageAll{
+        flex-direction: column;
+        height: 70%;
+        justify-content: center;
+    }
+
+    .LandingPageContentImage img{
+        width: 500px;
+    }
+    .LandingPageContent{
+        width: 80%;
+        text-align: center;
+        height: 30%;
+    }
 }
