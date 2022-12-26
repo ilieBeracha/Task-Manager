@@ -39,9 +39,22 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
                         <div className="TaskDate">
                             <span>{task.taskDate}</span> <br />
                         </div>
-                        <div className="TaskPriorityDiv">
-                            <span>{task.taskPriority}</span>
-                        </div>
+                        {task.taskPriority === "High" ?
+                            <div className="TaskPriorityDiv TaskBacklogPriority TaskBacklogPriorityHigh">
+
+                                <span>{task.taskPriority}</span>
+                            </div>
+                            : task.taskPriority === "Mid" ?
+                                <div className="TaskPriorityDiv TaskBacklogPriority TaskBacklogPriorityMid">
+
+                                    <span>{task.taskPriority}</span>
+                                </div>
+                                : task.taskPriority === "Low" ?
+                                    <div className="TaskPriorityDiv TaskBacklogPriority TaskBacklogPriorityLow">
+
+                                        <span>{task.taskPriority}</span>
+                                    </div>
+                                    : <></>}
                     </div>
                 )
             }

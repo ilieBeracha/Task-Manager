@@ -58,7 +58,11 @@ function AddTask({ refreshTasks, setRefreshTasks }: any) {
                             <label htmlFor="">Date: </label> <br />
                             <input required type="date" {...register('taskDate')} /> <br />
                             <label htmlFor="">Priority: </label> <br />
-                            <input max={5} type="number" {...register('taskPriority')} /> <br />
+                            <select {...register('taskPriority')} id="">
+                                <option value="High">High</option>
+                                <option value="Mid">Mid</option>
+                                <option value="Low">Low</option>
+                            </select>
                             <label htmlFor="">Status: </label> <br />
                             <select id="" {...register('taskStatus')}>
                                 <option value="todo">Todo</option>

@@ -10,7 +10,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-
+    margin: 0 auto;
 }
 .TasksDiv{
     min-width: 30%;

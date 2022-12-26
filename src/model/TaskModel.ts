@@ -15,7 +15,7 @@ export interface TaskModel{
     taskContent:string,
     taskDate:string,
     // taskHour:string,
-    taskPriority:any,
+    taskPriority:string,
     taskId:string,
     taskStatus: string
 }

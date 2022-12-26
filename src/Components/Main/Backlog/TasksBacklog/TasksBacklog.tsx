@@ -1,4 +1,3 @@
-import { Rating } from "react-simple-star-rating";
 import { TaskModel } from "../../../../model/TaskModel";
 import "./TasksBacklog.css";
 
@@ -22,16 +21,22 @@ function TasksBacklog({ task }: { task: TaskModel }): JSX.Element {
                             <span>{task.taskStatus}</span>
                         </div>
                         : <></>}
-            <div className="TaskBacklogPriority">
-                {/* <span>{task.taskPriority}</span> */}
-                <Rating
-                    initialValue={task.taskPriority}
-                    readonly={true}
-                    iconsCount={5}
-                    size={20}
-                /* Available Props */
-                />
-            </div>
+            {task.taskPriority === "High" ?
+                <div className="TaskBacklogPriority TaskBacklogPriorityHigh">
+
+                    <span>{task.taskPriority}</span>
+                </div>
+                : task.taskPriority === "Mid" ?
+                    <div className="TaskBacklogPriority TaskBacklogPriorityMid">
+
+                        <span>{task.taskPriority}</span>
+                    </div>
+                    : task.taskPriority === "Low" ?
+                        <div className="TaskBacklogPriority TaskBacklogPriorityLow">
+
+                            <span>{task.taskPriority}</span>
+                        </div>
+                        : <></>}
             <div className="TaskBacklogDate">
                 <span>{task.taskDate}</span>
             </div>
