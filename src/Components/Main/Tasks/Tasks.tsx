@@ -104,13 +104,16 @@ function Tasks(): JSX.Element {
             newStatus = "completed"
         }
 
+        console.log(newStatus)
+
         updateTask(add, newStatus);
     }
 
     async function updateTask(task: TaskModel, newStatus: string) {
         const sub = await getIdJwt();
-        task.taskStatus = newStatus;
-        await apiService.updateTask(sub, task);
+        const updatedTask ={...task};
+        updatedTask.taskStatus = newStatus
+        await apiService.updateTask(sub, updatedTask);
     }
 
 
