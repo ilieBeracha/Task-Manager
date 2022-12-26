@@ -1,0 +1,61 @@
+.TasksBacklog {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 8%;
+    align-items: center;
+    /* background-color: var(--color1); */
+    background-color: white;
+    border: 1px solid lightgray;
+    /* margin: 0 auto; */
+}
+
+.TaskBacklogName {
+    padding-left: 10px;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.TaskBacklogStatus {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.TaskBacklogPriority {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.TaskBacklogDate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    height: 100%;
+}
+
+.TaskBacklogStatusTodo{
+    /* height: 100%; */
+    background-color: orange;
+    opacity: 0.9;
+}
+.TaskBacklogStatusTodoInProgress{
+    /* height: 100%; */
+    background-color: #A75CDA;
+    opacity: 0.9;
+
+}
+.TaskBacklogStatusTodoCompleted{
+    background-color: #40CC80;
+    opacity: 0.9;
+
+}

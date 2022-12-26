@@ -43,6 +43,10 @@
   margin: 0;
 }
 
+.editTaskDiv{
+  color: var(--color2);
+}
+
 .eraseTaskDiv,
 .editTaskDiv {
   position: absolute;
@@ -69,6 +73,21 @@
 .editTaskDiv:active {
   background-color: rgba(0, 0, 0, 0.2);
 }
+
+.TaskPriorityDiv{
+  position: absolute;
+  /* width: 100%; */
+  top: -10px;
+  left: -10px;
+  z-index: 2;
+  background-color: yellow;
+  padding: 3px;
+  border-radius: 20%;
+  /* display: ; */
+  
+}
+
+
 
 @media screen and (max-width: 700px) {
   .Task {

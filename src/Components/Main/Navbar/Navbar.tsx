@@ -7,6 +7,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useDispatch } from "react-redux";
 import { ifUser } from "../../../app/usersSlice";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 function Navbar(): JSX.Element {
     const dispatch = useDispatch()
@@ -23,10 +24,12 @@ function Navbar(): JSX.Element {
             </div>
             <div className="NavbarLinks">
                 <NavLink to={'/'}>
-                    <ListAltIcon />
+                    <DashboardIcon />
                 </NavLink>
-                <NavLink to={'/analytics'}>
-                    <SignalCellularAltIcon />
+                <NavLink to={'/backlog'}>
+                    {/* <SignalCellularAltIcon /> */}
+                    <ListAltIcon />
+
                 </NavLink>
                 <NavLink to={'/profile'}>
                     <AccountBoxIcon />

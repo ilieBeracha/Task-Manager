@@ -57,7 +57,7 @@
   .TasksHeader .search-container button[type="submit"] {
     border: none;
     outline: none;
-    background-color: var(--color3);
+    background-color: rgb(147, 139, 139);
     color: #fff;
     font-size: 1em;
     padding: 10px;

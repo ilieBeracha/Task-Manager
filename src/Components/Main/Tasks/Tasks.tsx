@@ -6,20 +6,27 @@ import Task from "./Task/Task";
 import AddTask from "./AddTask/AddTask";
 import { getIdJwt } from "../../../Service/getIdJwt";
 import { Droppable, DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getTasksRedux } from "../../../app/TasksSlice";
 
 
 
 function Tasks(): JSX.Element {
-    const [tasks, setTasks] = useState<TaskModel[]>([]);
+    // const [tasks, setTasks] = useState<TaskModel[]>([]);
     const [todo, setTodo] = useState<TaskModel[]>([])
     const [inProgress, setInProgress] = useState<TaskModel[]>([])
-    const [completed, setCompleted] = useState<TaskModel[]>([])
+    const [completed, setCompleted] = useState<TaskModel[]>([]);
+
+    const tasksSelector = useSelector((state:any)=> state.tasks);
+    const dispatch = useDispatch();
 
     const [refreshTasks, setRefreshTasks] = useState<boolean>(false);
 
 
     useEffect(() => {
-        getTasks()
+        getTasks();
+        console.log(tasksSelector)
     }, [refreshTasks]);
 
 
@@ -27,7 +34,8 @@ function Tasks(): JSX.Element {
         const sub = await getIdJwt();
         let results = await apiService.getTasks(sub)
         const jsonResults: any = await results.json();
-        setTasks([...jsonResults]);
+        // setTasks([...jsonResults]);
+        dispatch(getTasksRedux(jsonResults))
 
         const todoTasks = jsonResults.filter((res: any) => res.taskStatus === "todo");
         setTodo(todoTasks);
@@ -45,8 +53,8 @@ function Tasks(): JSX.Element {
         if (event.target.value === '') {
             await getTasks();
         } else {
-            const searchResults = tasks.filter((t) => (t.taskName).toLocaleLowerCase().includes((event.target.value).toLocaleLowerCase()) || (t.taskContent).toLocaleLowerCase().includes((event.target.value).toLocaleLowerCase()));
-            setTasks(searchResults);
+            const searchResults = tasksSelector.filter((t:any) => (t.taskName).toLocaleLowerCase().includes((event.target.value).toLocaleLowerCase()) || (t.taskContent).toLocaleLowerCase().includes((event.target.value).toLocaleLowerCase()));
+            dispatch(getTasksRedux(searchResults));
             setTodo(searchResults.filter((res: any) => res.taskStatus === "todo"));
             setInProgress(searchResults.filter((res: any) => res.taskStatus === "inProgress"));
             setCompleted(searchResults.filter((res: any) => res.taskStatus === "completed"));
@@ -114,7 +122,6 @@ function Tasks(): JSX.Element {
                     <input onChange={(e) => searchTasks(e)} type="text" placeholder="Search tasks..." />
                     <button type="submit">Search</button>
                 </div>
-
             </div>
             <DragDropContext onDragEnd={onDragEnd}>
                 <div className="TasksList">
@@ -125,7 +132,6 @@ function Tasks(): JSX.Element {
                                     <div className="TasksDivTitle">
                                         <h5>To Do</h5>
                                     </div>
-
                                     <div className="TasksDisplayed TasksTodoDiv">
                                         {todo.length < 5 ?
                                             todo.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.taskId} task={t} />)
@@ -172,7 +178,7 @@ function Tasks(): JSX.Element {
                                     </div>
 
                                     <div className="TasksDisplayed TasksCompletedDiv">
-                                        {completed.length<5 ?
+                                        {completed.length < 5 ?
                                             completed.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.taskId} task={t} />)
                                             : <div className="TasksDisplayed TasksDisplayedOver3">
                                                 {completed.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.taskId} task={t} />)}

@@ -38,9 +38,10 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
                         </div>
                         <div className="TaskDate">
                             <span>{task.taskDate}</span> <br />
-                            <span>{task.taskHour}</span>
                         </div>
-
+                        <div className="TaskPriorityDiv">
+                            <span>{task.taskPriority}</span>
+                        </div>
                     </div>
                 )
             }
