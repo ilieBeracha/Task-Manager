@@ -1,7 +1,7 @@
 .Task {
   position: relative;
   width: 60%;
-  min-height: 110px;
+  min-height: 130px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -89,12 +89,15 @@
 }
 
 .TaskLabel {
-  display: flex;
+  position: absolute;
+  top: -8px;
+  left: -10px;
+   display: flex;
   justify-content: center;
   align-items: center;
   width: 55px;
   padding: 2px;
-  font-size: 12px;
+  font-size: 12px; 
 }
 
 .TaskLabelWork {

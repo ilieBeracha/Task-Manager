@@ -65,7 +65,7 @@ function Dashboard(): JSX.Element {
                         <h2>Welcome back <span className="DashboardStateColor">{getName}</span></h2>
                         {completedTasksAvg ?
 
-                            <p>You have Completed <span className="DashboardStateColor">{completedTasksAvg.toFixed(1)}% </span>of your tasks!</p>
+                            <p>You have Completed <span className="DashboardStateColor">{completedTasksAvg.toFixed(0)}% </span>of your tasks!</p>
                             : <p>You have Completed <span className="DashboardStateColor">%</span>of your tasks!</p>
                         }
                     </div>
@@ -83,9 +83,10 @@ function Dashboard(): JSX.Element {
                         </div>
 
                         <div className="DashboardTodayDivTasks">
-                            {todayTasksState.map((task:TaskModel)=>(
+                            {todayTasksState.length!==0?
+                            todayTasksState.map((task:TaskModel)=>(
                                 <TodayTask key={task.taskId} task={task}/>
-                            ))}
+                            )):<div className="DashboardTodayNoTasks">No tasks for today!</div>}
                         </div>
                     </div>
 

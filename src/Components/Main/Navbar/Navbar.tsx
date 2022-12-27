@@ -35,9 +35,9 @@ function Navbar(): JSX.Element {
                     <ListAltIcon />
 
                 </NavLink>
-                <NavLink to={'/profile'}>
+                {/* <NavLink to={'/profile'}>
                     <AccountBoxIcon />
-                </NavLink>
+                </NavLink> */}
                 <NavLink to={'/settings'}>
                     <SettingsIcon />
                 </NavLink>

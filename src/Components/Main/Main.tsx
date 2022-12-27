@@ -39,7 +39,7 @@ function Main(): JSX.Element {
                 <Route path="/" element={<Dashboard />}></Route>
                 <Route path="/wall" element={<Tasks />}></Route>
                 <Route path="/backlog" element={<Backlog />}></Route>
-                <Route path="/profile" element={'profile'}></Route>
+                {/* <Route path="/profile" element={'profile'}></Route> */}
                 <Route path="/settings" element={'settings'}></Route>
             </Routes>
         </div>
