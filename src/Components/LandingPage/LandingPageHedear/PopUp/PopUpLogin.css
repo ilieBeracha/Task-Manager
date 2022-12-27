@@ -7,7 +7,7 @@
     border-radius: 10px;
 }
 
-.PopUpFormDiv{
+.PopUpFormDivLogin{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -15,11 +15,11 @@
     width: 100%;
 }
 
-.PopUpFormDiv form input{
+.PopUpFormDivLogin form input{
     border: none;
     border-bottom: 1px solid black;
 }
-.PopUpFormDiv form{
+.PopUpFormDivLogin form{
     /* height: 200px; */
     display: flex;
     flex-direction: column;
@@ -28,11 +28,11 @@
     width: 100%;
 }
 
-.PopUpFormDiv input{
+.PopUpFormDivLogin input{
     height: 20px;
 }
 
-.PopUpFormDiv button{
+.PopUpFormDivLogin button{
     cursor: pointer;
     background-color: transparent;
     border: none;

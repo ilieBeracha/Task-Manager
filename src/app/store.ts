@@ -5,6 +5,6 @@ import usersSlice from "./usersSlice";
 export const store = configureStore({
     reducer:{
         logged: usersSlice,
-        tasks: TasksSlice
+        tasks: TasksSlice,
     }
 })

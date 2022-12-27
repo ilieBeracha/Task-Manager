@@ -70,7 +70,7 @@ function PopUpLogin() {
             Login
           </Typography>
           {/* <Typography className='PopUpLoginFormDiv' id="modal-modal-description" sx={{ mt: 5 }}> */}
-          <div className='PopUpFormDiv'>
+          <div className='PopUpFormDivLogin'>
             <form onSubmit={handleSubmit(saveLoginDetails)} action="">
               <label htmlFor="">Username: </label> <br />
               <input type="text" {...register('username')} /> <br /> 

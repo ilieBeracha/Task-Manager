@@ -5,6 +5,7 @@ import { getFirstAndLastNameJwt } from "../../../Service/getIdJwt";
 import { useSelector } from "react-redux";
 import { TaskModel } from "../../../model/TaskModel";
 import TodayTask from "./TodayTask/TodayTask";
+import { useDispatch } from "react-redux";
 
 
 function Dashboard(): JSX.Element {
@@ -45,6 +46,7 @@ function Dashboard(): JSX.Element {
     }
 
     useEffect(() => {
+        
         getNames();
         getAvgOfTasksCompleted();
         getTodayTasks();
@@ -77,12 +79,12 @@ function Dashboard(): JSX.Element {
 
                     <div className="DashboardTodayDiv">
                         <div className="DashboardTodayDivHeader">
-                            <h5>Today Tasks: </h5>
+                            <h5>Today Tasks (not completed): </h5>
                         </div>
 
                         <div className="DashboardTodayDivTasks">
                             {todayTasksState.map((task:TaskModel)=>(
-                                <TodayTask task={task}/>
+                                <TodayTask key={task.taskId} task={task}/>
                             ))}
                         </div>
                     </div>
@@ -95,7 +97,9 @@ function Dashboard(): JSX.Element {
             </div>
 
             <div className="DashboardSecondaryDiv">
-
+                <div className="DashboardSecondaryDivHeader">
+                    <h5>Tasks by Labels: </h5>
+                </div>
             </div>
         </div>
     );

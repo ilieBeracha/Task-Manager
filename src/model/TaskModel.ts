@@ -10,12 +10,14 @@ export interface UsersModel{
 
 export interface TaskModel{
     index:number,
-    state:string,
     taskName:string,
     taskContent:string,
     taskDate:string,
     // index:number,
+    label:string,
+    state:string,
     taskPriority:string,
     taskId:string,
     taskStatus: string
 }
+

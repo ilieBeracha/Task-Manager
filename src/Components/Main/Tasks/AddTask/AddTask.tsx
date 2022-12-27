@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { apiService } from '../../../../Service/ApiService';
 import { getIdJwt } from '../../../../Service/getIdJwt';
 import './AddTask.css'
+import { useEffect, useState } from 'react';
+import { labelsArr } from '../../../../Service/labels';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -21,6 +23,8 @@ const style = {
 };
 
 function AddTask({ refreshTasks, setRefreshTasks }: any) {
+    const [labels, setLabels] = useState<any>(labelsArr);
+    const [selectedLabel,setSelectedLabel] = useState()
     const { register, handleSubmit, formState: { errors } } = useForm<TaskModel>();
     const loginSelector = useSelector((state: any) => state.logged);
     const dispatch = useDispatch();
@@ -37,6 +41,11 @@ function AddTask({ refreshTasks, setRefreshTasks }: any) {
         await apiService.AddNewTask(sub, task).catch(e => console.log(e));
     }
 
+    useEffect(() => {
+        console.log(labels)
+        console.log(selectedLabel)
+    }, [])
+
     return (
         <div className='AddTask'>
             <button onClick={handleOpen}>Add Task</button>
@@ -52,29 +61,42 @@ function AddTask({ refreshTasks, setRefreshTasks }: any) {
                     </Typography>
                     <div className='PopUpFormDiv'>
                         <form onSubmit={handleSubmit(saveTask)} action="">
-                            <label htmlFor="">Title: </label> <br />
-                            <input required type="text" {...register('taskName')} /> <br />
-                            <label htmlFor="">Content: </label> <br />
-                            <input required type="text" {...register('taskContent')} /> <br />
-                            <label htmlFor="">Date: </label> <br />
-                            <input required type="date" {...register('taskDate')} /> <br />
-                            <label htmlFor="">Priority: </label> <br />
-                            <select {...register('taskPriority')} id="">
-                                <option value="High">High</option>
-                                <option value="Mid">Mid</option>
-                                <option value="Low">Low</option>
-                            </select>
-                            <label htmlFor="">Status: </label> <br />
-                            <select id="" {...register('taskStatus')}>
-                                <option value="todo">Todo</option>
-                                <option value="inProgress">In Progress</option>
-                                <option value="completed">Completed</option>
-                            </select>
-                            <button type='submit' className='PopupAddTask'>Add</button>
+                            <div className='PopUpFormSeperate'>
+
+                                <label htmlFor="">Title: </label> <br />
+                                <input required type="text" {...register('taskName')} /> <br />
+                                <label htmlFor="">Content: </label> <br />
+                                <input required type="text" {...register('taskContent')} /> <br />
+                                <label htmlFor="">Date: </label> <br />
+                                <input required type="date" {...register('taskDate')} /> <br />
+                                <label htmlFor="">Priority: </label> <br />
+                                <select {...register('taskPriority')} id="">
+                                    <option value="High">High</option>
+                                    <option value="Mid">Mid</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                                <label htmlFor="">Status: </label> <br />
+                                <select id="" {...register('taskStatus')}>
+                                    <option value="todo">Todo</option>
+                                    <option value="inProgress">In Progress</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                                
+                                <button type='submit' className='PopupAddTask'>Add</button>
+                            </div>
+                             <div className='popUpTagsDiv'>
+                                <h5>Labels: </h5>
+                                <select  id=""{...register('label')}>
+                                    <option value="">None</option>
+                                    <option value="Work">Work</option>
+                                    <option value="Personal">Personal</option>
+                                    <option value="Home">Home</option>
+                                    <option value="School">School</option>
+                                    <option value="Financial">Financial</option>
+                                    <option value="Leisure">Leisure</option>
+                                </select>
+                            </div> 
                         </form>
-                        <div className='popUpTagsDiv'>
-                            <h5>Tags: </h5>
-                        </div>
                     </div>
                 </Box>
             </Modal>

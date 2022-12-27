@@ -5,31 +5,41 @@
 }
 .css-1g9elgk {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     /* justify-content: center; */
     /* align-items: center; */
     border-radius: 10px;
 }
 
-.PopUpFormDiv{
+.PopUpFormSeperate{
+    width: 80%;
+    height: 100%;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+/* .PopUpFormDiv{
+    display: flex;
+} */
 
 .PopUpFormDiv form input{
     border: none;
     border-bottom: 1px solid black;
 }
+
 .PopUpFormDiv form select{
     margin-bottom: 5px;
 }
-.PopUpFormDiv form{
-    /* height: 200px; */
+
+/* .PopUpFormDiv form{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 70%;
-}
+} */
 
 .PopUpFormDiv input{
     height: 20px;
@@ -64,3 +74,41 @@
     border-radius: 5px;
     /* bottom: 15px; */
 }
+
+
+
+.PopUpFormDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.PopUpFormDiv form input{
+    border: none;
+    border-bottom: 1px solid black;
+}
+.PopUpFormDiv form{
+    /* height: 200px; */
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.PopUpFormDiv input{
+    height: 20px;
+}
+
+.PopUpFormDiv button{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    padding: 8px 15px 8px 15px;
+    background-color: var(--color4);
+    border-radius: 10px;
+    color: var(--color1);
+} 

@@ -36,6 +36,45 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
                         <div className="TaskContent">
                             <span>{task.taskContent}</span>
                         </div>
+                        {
+                            task.label === "Work" ?
+                                <div className="TaskLabel TaskLabelWork">
+                                    <span>{task.label}</span>
+                                </div>
+                                : task.label === "Personal" ?
+                                    <div className="TaskLabel TaskLabelPersonal">
+                                        <span>{task.label}</span>
+                                    </div>
+                                    :
+                                    task.label === "Home" ?
+                                        <div className="TaskLabel TaskLabelHome">
+                                            <span>{task.label}</span>
+                                        </div>
+                                        :
+                                        task.label === "School" ?
+                                            <div className="TaskLabel TaskLabelSchool">
+                                                <span>{task.label}</span>
+                                            </div>
+                                            :
+                                            task.label === "Financial" ?
+                                                <div className="TaskLabel TaskLabelFinancial">
+                                                    <span>{task.label}</span>
+                                                </div>
+                                                :
+                                                task.label === "Health" ?
+                                                    <div className="TaskLabel TaskLabelHealth">
+                                                        <span>{task.label}</span>
+                                                    </div>
+                                                    :
+                                                    task.label === "Leisure" ?
+                                                        <div className="TaskLabel TaskLabelLeisure">
+                                                            <span>{task.label}</span>
+                                                        </div>
+                                                        :
+                                                        <div className="TaskLabel">
+                                                            <span>{task.label}</span>
+                                                        </div>
+                        }
                         <div className="TaskDate">
                             <span>{task.taskDate}</span> <br />
                         </div>
@@ -55,6 +94,7 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
                                         <span>{task.taskPriority}</span>
                                     </div>
                                     : <></>}
+
                     </div>
                 )
             }

@@ -13,7 +13,6 @@ import { getTasksRedux } from "../../../app/TasksSlice";
 
 
 function Tasks(): JSX.Element {
-    // const [tasks, setTasks] = useState<TaskModel[]>([]);
     const [todo, setTodo] = useState<TaskModel[]>([])
     const [inProgress, setInProgress] = useState<TaskModel[]>([])
     const [completed, setCompleted] = useState<TaskModel[]>([]);

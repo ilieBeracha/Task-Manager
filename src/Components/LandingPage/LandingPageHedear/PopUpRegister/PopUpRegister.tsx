@@ -55,7 +55,7 @@ function PopUpRegister() {
                         Register
                     </Typography>
                     {/* <Typography className='PopUpLoginFormDiv' id="modal-modal-description" sx={{ mt: 5 }}> */}
-                    <div className='PopUpFormDiv'>
+                    <div className='PopUpFormDivLogin'>
                         <form onSubmit={handleSubmit(saveRegisterDetails)} action="">
                             <label htmlFor="">First Name: </label> <br />
                             <input type="text" {...register('firstName')} /> <br />
