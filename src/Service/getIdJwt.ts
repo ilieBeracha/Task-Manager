@@ -5,3 +5,9 @@ export async function getIdJwt(){
         token = jwtDecode(token)
         return token.sub
 }
+
+export async function getFirstAndLastNameJwt(){
+    let token:any = window.localStorage.getItem('token');
+        token = jwtDecode(token)
+        return token.firstName
+}

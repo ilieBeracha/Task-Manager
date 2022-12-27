@@ -13,10 +13,6 @@
 
 .PopUpFormDiv{
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
 }
 
 .PopUpFormDiv form input{
@@ -32,11 +28,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 70%;
 }
 
 .PopUpFormDiv input{
     height: 20px;
+}
+
+.popUpTagsDiv{
+    height: 100%;
+    width: 30%;
 }
 
 .PopUpFormDiv button{

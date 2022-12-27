@@ -18,7 +18,7 @@ function Tasks(): JSX.Element {
     const [inProgress, setInProgress] = useState<TaskModel[]>([])
     const [completed, setCompleted] = useState<TaskModel[]>([]);
 
-    const tasksSelector = useSelector((state:any)=> state.tasks);
+    const tasksSelector = useSelector((state: any) => state.tasks);
     const dispatch = useDispatch();
 
     const [refreshTasks, setRefreshTasks] = useState<boolean>(false);
@@ -53,7 +53,7 @@ function Tasks(): JSX.Element {
         if (event.target.value === '') {
             await getTasks();
         } else {
-            const searchResults = tasksSelector.filter((t:any) => (t.taskName).toLocaleLowerCase().includes((event.target.value).toLocaleLowerCase()) || (t.taskContent).toLocaleLowerCase().includes((event.target.value).toLocaleLowerCase()));
+            const searchResults = tasksSelector.filter((t: any) => (t.taskName).toLocaleLowerCase().includes((event.target.value).toLocaleLowerCase()) || (t.taskContent).toLocaleLowerCase().includes((event.target.value).toLocaleLowerCase()));
             dispatch(getTasksRedux(searchResults));
             setTodo(searchResults.filter((res: any) => res.taskStatus === "todo"));
             setInProgress(searchResults.filter((res: any) => res.taskStatus === "inProgress"));
@@ -94,7 +94,8 @@ function Tasks(): JSX.Element {
         setTodo(todoTasks);
         setInProgress(inProgressTasks);
         setCompleted(completedTasks);
-
+        // dispatch(getTasksRedux([...todoTasks, ...inProgressTasks, ...completedTasks]))
+        // console.log(tasksSelector)
         let newStatus: string = add.newStatus;
         if (destination.droppableId === "TasksTodoDroppable") {
             newStatus = "todo"
@@ -111,21 +112,22 @@ function Tasks(): JSX.Element {
 
     async function updateTask(task: TaskModel, newStatus: string) {
         const sub = await getIdJwt();
-        const updatedTask ={...task};
+        const updatedTask = { ...task };
         updatedTask.taskStatus = newStatus
         await apiService.updateTask(sub, updatedTask);
     }
 
 
     return (
-        <div className="Tasks">
-            <div className="TasksHeader">
+        <div className="Tasks" >
+            {/* <button>List</button> */}
+            < div className="TasksHeader" >
                 <AddTask setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} />
                 <div className="search-container">
                     <input onChange={(e) => searchTasks(e)} type="text" placeholder="Search tasks..." />
                     <button type="submit">Search</button>
                 </div>
-            </div>
+            </div >
             <DragDropContext onDragEnd={onDragEnd}>
                 <div className="TasksList">
                     <Droppable droppableId="TasksTodoDroppable">

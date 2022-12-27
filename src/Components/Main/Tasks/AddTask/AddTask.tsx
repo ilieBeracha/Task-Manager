@@ -14,7 +14,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 300,
+    width: 500,
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 4,
@@ -30,6 +30,7 @@ function AddTask({ refreshTasks, setRefreshTasks }: any) {
 
 
     async function saveTask(task: TaskModel) {
+        console.log(task)
         setRefreshTasks(!refreshTasks)
         handleClose();
         const sub = await getIdJwt()
@@ -71,6 +72,9 @@ function AddTask({ refreshTasks, setRefreshTasks }: any) {
                             </select>
                             <button type='submit' className='PopupAddTask'>Add</button>
                         </form>
+                        <div className='popUpTagsDiv'>
+                            <h5>Tags: </h5>
+                        </div>
                     </div>
                 </Box>
             </Modal>

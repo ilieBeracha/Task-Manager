@@ -5,9 +5,11 @@ import { getTasksRedux } from "../../app/TasksSlice";
 import { apiService } from "../../Service/ApiService";
 import { getIdJwt } from "../../Service/getIdJwt";
 import Backlog from "./Backlog/Backlog";
+import Dashboard from "./Dashboard/Dashboard";
 import "./Main.css";
 import Navbar from "./Navbar/Navbar";
 import Tasks from "./Tasks/Tasks";
+import TasksBoardOrList from "./TasksBoardOrList/TasksBoardOrList";
 
 function Main(): JSX.Element {
     const tasksSelector = useSelector((state: any) => state.tasks);
@@ -20,19 +22,22 @@ function Main(): JSX.Element {
         tasks = await tasks.json();
         dispatch(getTasksRedux(tasks))
     }
-
+    console.log(tasksSelector)
     useEffect(() => {
         if (tasksSelector.length === 0) {
             getTasksIfTasksSelectorIsEmpty()
             console.log('changed')
         }
         console.log('checked')
-    }, [])
+    }, [tasksSelector]);
+
+
     return (
         <div className="Main">
 			<Navbar />
             <Routes>
-                <Route path="/" element={<Tasks />}></Route>
+                <Route path="/" element={<Dashboard />}></Route>
+                <Route path="/wall" element={<Tasks />}></Route>
                 <Route path="/backlog" element={<Backlog />}></Route>
                 <Route path="/profile" element={'profile'}></Route>
                 <Route path="/settings" element={'settings'}></Route>
