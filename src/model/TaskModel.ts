@@ -9,13 +9,13 @@ export interface UsersModel{
 }
 
 export interface TaskModel{
-    index:number,
+    index?:number,
     taskName:string,
     taskContent:string,
     taskDate:string,
     // index:number,
-    label:string,
-    state:string,
+    label?:string,
+    state?:string,
     taskPriority:string,
     taskId:string,
     taskStatus: string

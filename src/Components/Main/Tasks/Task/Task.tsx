@@ -5,9 +5,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import "./Task.css";
 import { getIdJwt } from "../../../../Service/getIdJwt";
 import { Draggable } from "react-beautiful-dnd";
+import EditTaskPopUp from "./editTaskPopup/editTaskPopup";
 
 function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: { task: TaskModel, index: number, setRefreshTasks: any, refreshTasks: any }): JSX.Element {
-
     async function deleteTask() {
         console.log(refreshTasks)
         const userId = await getIdJwt();
@@ -15,9 +15,6 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
         setRefreshTasks(!refreshTasks)
     }
 
-    async function editTask() {
-        console.log(index)
-    }
 
     return (
         <Draggable draggableId={task.taskId.toString()} index={index}>
@@ -27,8 +24,9 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
                         <div onClick={() => deleteTask()} className='eraseTaskDiv'>
                             <CloseIcon fontSize="small" />
                         </div>
-                        <div onClick={() => editTask()} className='editTaskDiv'>
-                            <EditIcon fontSize="small" />
+                        <div className='editTaskDiv'>
+                            {/* <EditIcon fontSize="small" /> */}
+                            <EditTaskPopUp id={task.taskId} task={task}/>
                         </div>
                         <div className="TaskName">
                             <h5>{task.taskName}</h5>
@@ -39,36 +37,36 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
                         {
                             task.label === "Work" ?
                                 <div className="TaskLabel TaskLabelWork">
-                                    <span>{task.label}</span>
+                                    <span>W</span>
                                 </div>
                                 : task.label === "Personal" ?
                                     <div className="TaskLabel TaskLabelPersonal">
-                                        <span>{task.label}</span>
+                                        <span>P</span>
                                     </div>
                                     :
                                     task.label === "Home" ?
                                         <div className="TaskLabel TaskLabelHome">
-                                            <span>{task.label}</span>
+                                            <span>H</span>
                                         </div>
                                         :
                                         task.label === "School" ?
                                             <div className="TaskLabel TaskLabelSchool">
-                                                <span>{task.label}</span>
+                                                <span>S</span>
                                             </div>
                                             :
                                             task.label === "Financial" ?
                                                 <div className="TaskLabel TaskLabelFinancial">
-                                                    <span>{task.label}</span>
+                                                    <span>F</span>
                                                 </div>
                                                 :
                                                 task.label === "Health" ?
                                                     <div className="TaskLabel TaskLabelHealth">
-                                                        <span>{task.label}</span>
+                                                        <span>H</span>
                                                     </div>
                                                     :
                                                     task.label === "Leisure" ?
                                                         <div className="TaskLabel TaskLabelLeisure">
-                                                            <span>{task.label}</span>
+                                                            <span>L</span>
                                                         </div>
                                                         :
                                                         <div className="TaskLabel">
