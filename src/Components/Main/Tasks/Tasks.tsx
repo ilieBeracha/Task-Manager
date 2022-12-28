@@ -9,6 +9,7 @@ import { Droppable, DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getTasksRedux } from "../../../app/TasksSlice";
+import { tasksFunctions } from "../../../functions/tasksFunctions";
 
 
 
@@ -24,33 +25,15 @@ function Tasks(): JSX.Element {
 
 
     useEffect(() => {
-        getTasks();
+        tasksFunctions.getTasks(dispatch,getTasksRedux,setTodo,setInProgress,setCompleted);
         console.log(tasksSelector)
     }, [refreshTasks]);
-
-
-    async function getTasks() {
-        const sub = await getIdJwt();
-        let results = await apiService.getTasks(sub)
-        const jsonResults: any = await results.json();
-        // setTasks([...jsonResults]);
-        dispatch(getTasksRedux(jsonResults))
-
-        const todoTasks = jsonResults.filter((res: any) => res.taskStatus === "todo");
-        setTodo(todoTasks);
-
-        const inProgressTasks = jsonResults.filter((res: any) => res.taskStatus === "inProgress");
-        setInProgress(inProgressTasks);
-
-        const completedTasks = jsonResults.filter((res: any) => res.taskStatus === "completed");
-        setCompleted(completedTasks);
-    }
-
 
     async function searchTasks(event: any) {
         event.preventDefault();
         if (event.target.value === '') {
-            await getTasks();
+            await tasksFunctions.getTasks(dispatch,getTasksRedux,setTodo,setInProgress,setCompleted);
+            ;
         } else {
             const searchResults = tasksSelector.filter((t: any) => (t.taskName).toLocaleLowerCase().includes((event.target.value).toLocaleLowerCase()) || (t.taskContent).toLocaleLowerCase().includes((event.target.value).toLocaleLowerCase()));
             dispatch(getTasksRedux(searchResults));
@@ -93,8 +76,7 @@ function Tasks(): JSX.Element {
         setTodo(todoTasks);
         setInProgress(inProgressTasks);
         setCompleted(completedTasks);
-        // dispatch(getTasksRedux([...todoTasks, ...inProgressTasks, ...completedTasks]))
-        // console.log(tasksSelector)
+
         let newStatus: string = add.newStatus;
         if (destination.droppableId === "TasksTodoDroppable") {
             newStatus = "todo"

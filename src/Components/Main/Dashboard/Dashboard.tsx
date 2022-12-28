@@ -1,55 +1,29 @@
 import "./Dashboard.css";
-import DashboardImg from '../../../images/dashboardImg2.png'
+import DashboardImg from '../../../images/dashboardImg6.png'
 import { useEffect, useState } from "react";
 import { getFirstAndLastNameJwt } from "../../../Service/getIdJwt";
 import { useSelector } from "react-redux";
 import { TaskModel } from "../../../model/TaskModel";
 import TodayTask from "./TodayTask/TodayTask";
 import { useDispatch } from "react-redux";
+import { dashBoardFunctions } from "../../../functions/dashboardFunctions";
 
 
 function Dashboard(): JSX.Element {
     const tasksSelector = useSelector((state: any) => state.tasks);
     const [getName, setGetName] = useState();
     const [completedTasksAvg, setCompletedTasksAvg] = useState<number>();
-    const [todayTasksState, setTodayTasksState] = useState<TaskModel[]>([])
+    const [todayTasksState, setTodayTasksState] = useState<TaskModel[]>([]);
 
-    async function getNames() {
-        let firstName = await getFirstAndLastNameJwt();
-        setGetName(firstName.toLocaleUpperCase())
-    }
-    async function getAvgOfTasksCompleted() {
-        if (!tasksSelector) return;
-        let counterOfTasks = tasksSelector.length;
-        let counterOfCompletedTasks = 0;
-        tasksSelector.map((task: TaskModel) => {
-            if (task.taskStatus === "completed") {
-                counterOfCompletedTasks++;
-            }
-        });
-        let percentageCompleted = ((counterOfCompletedTasks / counterOfTasks) * 100);
-        setCompletedTasksAvg(percentageCompleted);
-    }
-
-    async function getTodayTasks() {
-        let date = new Date().getDate()
-        let mon = new Date().getMonth() + 1
-        let year = new Date().getFullYear()
-        const todayDate = `${year}-${mon}-${date}`
-
-        let todayTasks = tasksSelector.filter((task: TaskModel) => {
-            return task.taskDate === todayDate && task.taskStatus !== 'completed'
-        });
-
-        setTodayTasksState([...todayTasks]);
-        console.log(todayTasksState)
-    }
+    let [todo, setTodo] = useState<number>(0)
+    let [inProgress, setInProgress] = useState<number>(0)
+    let [completed, setCompleted] = useState<number>(0)
 
     useEffect(() => {
-        
-        getNames();
-        getAvgOfTasksCompleted();
-        getTodayTasks();
+        dashBoardFunctions.getNames(setGetName);
+        dashBoardFunctions.getAvgOfTasksCompleted(tasksSelector,setCompletedTasksAvg);
+        dashBoardFunctions.filterTasksByStatus(tasksSelector, setTodo, setInProgress, setCompleted);
+        dashBoardFunctions.getTodayTasks(tasksSelector, setTodayTasksState, todayTasksState);
     }, [tasksSelector])
 
 
@@ -64,9 +38,15 @@ function Dashboard(): JSX.Element {
                     <div className="DashboardWelcomeBackMessage">
                         <h2>Welcome back <span className="DashboardStateColor">{getName}</span></h2>
                         {completedTasksAvg ?
+                            <div>
+                                <p>You have Completed <span className="DashboardStateColor">{completedTasksAvg.toFixed(0)}% </span>of your tasks!</p>
+                                <p><span> {todo}</span> To Do,<span> {inProgress}</span> In Progress,<span> {completed}</span> Completed</p>
+                                <p>Keep it up!</p>
+                            </div>
+                            :
+                            <p>You have Completed <span className="DashboardStateColor">%</span>of your tasks!</p>
 
-                            <p>You have Completed <span className="DashboardStateColor">{completedTasksAvg.toFixed(0)}% </span>of your tasks!</p>
-                            : <p>You have Completed <span className="DashboardStateColor">%</span>of your tasks!</p>
+
                         }
                     </div>
                 </div>
@@ -83,10 +63,10 @@ function Dashboard(): JSX.Element {
                         </div>
 
                         <div className="DashboardTodayDivTasks">
-                            {todayTasksState.length!==0?
-                            todayTasksState.map((task:TaskModel)=>(
-                                <TodayTask key={task.taskId} task={task}/>
-                            )):<div className="DashboardTodayNoTasks">No tasks for today!</div>}
+                            {todayTasksState.length !== 0 ?
+                                todayTasksState.map((task: TaskModel) => (
+                                    <TodayTask key={task.taskId} task={task} />
+                                )) : <div className="DashboardTodayNoTasks">No tasks for today!</div>}
                         </div>
                     </div>
 

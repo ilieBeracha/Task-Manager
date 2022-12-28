@@ -33,7 +33,7 @@
     background-color: white;
     display: flex;
     border-radius: 10px;
-
+    /* margin: 0 auto; */
 
 }
 
@@ -126,7 +126,7 @@
 }
 
 .DashboardWelcomeBackImage img{
-    max-width: 250px;
+    max-width: 300px;
 }
 
 .DashboardWelcomeBackImage{
