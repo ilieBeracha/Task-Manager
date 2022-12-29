@@ -6,8 +6,6 @@ import Modal from '@mui/material/Modal';
 import './editTaskPopup.css'
 import { useForm } from 'react-hook-form';
 import EditIcon from '@mui/icons-material/Edit';
-
-// import { useDispatch, useSelector } from 'react-redux';
 import { TaskModel } from '../../../../../model/TaskModel';
 import { apiService } from '../../../../../Service/ApiService';
 import { getIdJwt } from '../../../../../Service/getIdJwt';
@@ -26,26 +24,20 @@ const style = {
 };
 
 
-function EditTaskPopUp({ task, id,refreshTasks, setRefreshTasks }: { task: TaskModel, id: any,refreshTasks:any,setRefreshTasks:any }) {
-    // const [refreshTasks, setRefreshTasks] = React.useState(false);
+function EditTaskPopUp({ task, id, refreshTasks, setRefreshTasks }: { task: TaskModel, id: any, refreshTasks: any, setRefreshTasks: any }) {
     const { register, handleSubmit, formState: { errors } } = useForm<TaskModel>();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     async function editTask(taskEdit: TaskModel) {
+        setRefreshTasks(!refreshTasks)
         handleClose();
         taskEdit.taskId = id;
         const sub = await getIdJwt();
         await apiService.updateTask(sub, taskEdit).catch(e => console.log(e));
         setRefreshTasks(!refreshTasks);
-      }
-      
-
- 
-
-    
-
+    }
 
     return (
         <div className='editTaskPopup'>

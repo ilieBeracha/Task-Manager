@@ -1,17 +1,12 @@
 import { TaskModel } from "../../../../model/TaskModel";
 import { apiService } from "../../../../Service/ApiService";
 import CloseIcon from '@mui/icons-material/Close';
-import EditIcon from '@mui/icons-material/Edit';
 import "./Task.css";
 import { getIdJwt } from "../../../../Service/getIdJwt";
 import { Draggable } from "react-beautiful-dnd";
 import EditTaskPopUp from "./editTaskPopup/editTaskPopup";
-import { useEffect, useState } from "react";
 
 function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: { task: TaskModel, index: number, setRefreshTasks: any, refreshTasks: any }): JSX.Element {
-
-    const [refresh, setRefresh] = useState(refreshTasks);
-
 
     async function deleteTask() {
         const userId = await getIdJwt();
@@ -28,7 +23,7 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
                             <CloseIcon fontSize="small" />
                         </div>
                         <div className='editTaskDiv'>
-                            <EditTaskPopUp refreshTasks={refresh} setRefreshTasks={setRefresh} id={task.taskId} task={task}/>
+                            <EditTaskPopUp refreshTasks={refreshTasks} setRefreshTasks={setRefreshTasks} id={task.taskId} task={task}/>
                         </div>
                         <div className="TaskName">
                             <h5>{task.taskName}</h5>

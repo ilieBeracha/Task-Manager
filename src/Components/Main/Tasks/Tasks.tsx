@@ -11,29 +11,23 @@ import { useDispatch } from "react-redux";
 import { getTasksRedux } from "../../../app/TasksSlice";
 import { tasksFunctions } from "../../../functions/tasksFunctions";
 
-
-
 function Tasks(): JSX.Element {
     const [todo, setTodo] = useState<TaskModel[]>([])
     const [inProgress, setInProgress] = useState<TaskModel[]>([])
     const [completed, setCompleted] = useState<TaskModel[]>([]);
-
     const tasksSelector = useSelector((state: any) => state.tasks);
     const dispatch = useDispatch();
-
     const [refreshTasks, setRefreshTasks] = useState<boolean>(false);
 
 
     useEffect(() => {
-        console.log(todo);
-        
-        tasksFunctions.getTasks(dispatch,getTasksRedux,setTodo,setInProgress,setCompleted);
+        tasksFunctions.getTasks(dispatch, getTasksRedux, setTodo, setInProgress, setCompleted);
     }, [refreshTasks]);
 
     async function searchTasks(event: any) {
         event.preventDefault();
         if (event.target.value === '') {
-            await tasksFunctions.getTasks(dispatch,getTasksRedux,setTodo,setInProgress,setCompleted);
+            await tasksFunctions.getTasks(dispatch, getTasksRedux, setTodo, setInProgress, setCompleted);
             ;
         } else {
             const searchResults = tasksSelector.filter((t: any) => (t.taskName).toLocaleLowerCase().includes((event.target.value).toLocaleLowerCase()) || (t.taskContent).toLocaleLowerCase().includes((event.target.value).toLocaleLowerCase()));
@@ -74,8 +68,6 @@ function Tasks(): JSX.Element {
             completedTasks.splice(destination.index, 0, add)
         }
 
-        
-
         setTodo(todoTasks);
         setInProgress(inProgressTasks);
         setCompleted(completedTasks);
@@ -101,7 +93,6 @@ function Tasks(): JSX.Element {
 
     return (
         <div className="Tasks" >
-            {/* <button>List</button> */}
             < div className="TasksHeader" >
                 <AddTask setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} />
                 <div className="search-container">
@@ -116,6 +107,7 @@ function Tasks(): JSX.Element {
                             (provided) => (
                                 <div className="TasksDiv TasksTodo" ref={provided.innerRef} {...provided.droppableProps}>
                                     <div className="TasksDivTitle">
+                                        <span className="dot dotTodo"></span>
                                         <h5>To Do</h5>
                                     </div>
                                     <div className="TasksDisplayed TasksTodoDiv">
@@ -137,6 +129,7 @@ function Tasks(): JSX.Element {
                             (provided) => (
                                 <div className="TasksDiv TasksInProgress" ref={provided.innerRef} {...provided.droppableProps}>
                                     <div className="TasksDivTitle">
+                                    <span className="dot dotInProgress"></span>
                                         <h5>In Progress</h5>
                                     </div>
 
@@ -160,6 +153,7 @@ function Tasks(): JSX.Element {
                             (provided) => (
                                 <div className="TasksDiv TasksCompleted" ref={provided.innerRef} {...provided.droppableProps}>
                                     <div className="TasksDivTitle">
+                                    <span className="dot dotCompleted"></span>
                                         <h5>Completed</h5>
                                     </div>
 
