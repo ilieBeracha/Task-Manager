@@ -13,7 +13,6 @@ class DashBoardFunctions {
         });
 
         setTodayTasksState([...todayTasks]);
-        console.log(todayTasksState)
     }
 
     async filterTasksByStatus(tasksSelector: [], setTodo: any, setInProgress: any, setCompleted: any) {

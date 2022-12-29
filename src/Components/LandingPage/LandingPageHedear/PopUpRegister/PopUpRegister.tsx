@@ -30,7 +30,6 @@ function PopUpRegister() {
     const handleClose = () => setOpen(false);
 
     async function saveRegisterDetails(user: UsersModel) {
-        console.log(user)
         await apiService.register(user).then((res) => {
             if (res.ok) {
                 dispatch(ifUser(true))

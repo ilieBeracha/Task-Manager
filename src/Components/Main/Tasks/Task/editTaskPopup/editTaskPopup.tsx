@@ -26,30 +26,25 @@ const style = {
 };
 
 
-function EditTaskPopUp({ task, id }: { task: TaskModel, id: any }) {
-    const [refreshTasks, setRefreshTasks] = React.useState(false);
+function EditTaskPopUp({ task, id,refreshTasks, setRefreshTasks }: { task: TaskModel, id: any,refreshTasks:any,setRefreshTasks:any }) {
+    // const [refreshTasks, setRefreshTasks] = React.useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm<TaskModel>();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     async function editTask(taskEdit: TaskModel) {
-        handleClose()
-        taskEdit.taskId = id
-        const sub = await getIdJwt()
+        handleClose();
+        taskEdit.taskId = id;
+        const sub = await getIdJwt();
         await apiService.updateTask(sub, taskEdit).catch(e => console.log(e));
-    }
+        setRefreshTasks(!refreshTasks);
+      }
+      
 
-    async function getTasks() {
-        const sub = await getIdJwt()
-        await apiService.getTasks(sub)
-    }
+ 
 
-    useEffect(() => {
-        console.log(refreshTasks);
-        getTasks()
-
-    }, [refreshTasks]);
+    
 
 
     return (
@@ -88,7 +83,7 @@ function EditTaskPopUp({ task, id }: { task: TaskModel, id: any }) {
                                     <option value="inProgress">In Progress</option>
                                     <option value="completed">Completed</option>
                                 </select>
-                                <button onClick={() => setRefreshTasks(!refreshTasks)} type='submit' className='PopupAddTask'>Edit</button>
+                                <button type='submit' className='PopupAddTask'>Edit</button>
                             </div>
                             <div className='popUpTagsDiv'>
                                 <h5>Labels: </h5>

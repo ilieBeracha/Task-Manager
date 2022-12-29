@@ -6,15 +6,18 @@ import "./Task.css";
 import { getIdJwt } from "../../../../Service/getIdJwt";
 import { Draggable } from "react-beautiful-dnd";
 import EditTaskPopUp from "./editTaskPopup/editTaskPopup";
+import { useEffect, useState } from "react";
 
 function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: { task: TaskModel, index: number, setRefreshTasks: any, refreshTasks: any }): JSX.Element {
+
+    const [refresh, setRefresh] = useState(refreshTasks);
+
+
     async function deleteTask() {
-        console.log(refreshTasks)
         const userId = await getIdJwt();
         apiService.deleteTask(task.taskId, userId);
         setRefreshTasks(!refreshTasks)
     }
-
 
     return (
         <Draggable draggableId={task.taskId.toString()} index={index}>
@@ -25,8 +28,7 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
                             <CloseIcon fontSize="small" />
                         </div>
                         <div className='editTaskDiv'>
-                            {/* <EditIcon fontSize="small" /> */}
-                            <EditTaskPopUp id={task.taskId} task={task}/>
+                            <EditTaskPopUp refreshTasks={refresh} setRefreshTasks={setRefresh} id={task.taskId} task={task}/>
                         </div>
                         <div className="TaskName">
                             <h5>{task.taskName}</h5>

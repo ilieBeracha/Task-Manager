@@ -1,0 +1,11 @@
+.PieChart {
+	/* width: 98%; */
+    height: 98%;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 700px) {
+    .PieChart{
+        height: 100%;
+    }
+}

@@ -34,17 +34,16 @@ function AddTask({ refreshTasks, setRefreshTasks }: any) {
 
 
     async function saveTask(task: TaskModel) {
-        console.log(task)
         setRefreshTasks(!refreshTasks)
         handleClose();
         const sub = await getIdJwt()
         await apiService.AddNewTask(sub, task).catch(e => console.log(e));
     }
 
-    useEffect(() => {
-        console.log(labels)
-        console.log(selectedLabel)
-    }, [])
+    // useEffect(() => {
+    //     console.log(labels)
+    //     console.log(selectedLabel)
+    // }, [])
 
     return (
         <div className='AddTask'>

@@ -25,8 +25,9 @@ function Tasks(): JSX.Element {
 
 
     useEffect(() => {
+        console.log(todo);
+        
         tasksFunctions.getTasks(dispatch,getTasksRedux,setTodo,setInProgress,setCompleted);
-        console.log(tasksSelector)
     }, [refreshTasks]);
 
     async function searchTasks(event: any) {
@@ -73,6 +74,8 @@ function Tasks(): JSX.Element {
             completedTasks.splice(destination.index, 0, add)
         }
 
+        
+
         setTodo(todoTasks);
         setInProgress(inProgressTasks);
         setCompleted(completedTasks);
@@ -85,9 +88,6 @@ function Tasks(): JSX.Element {
         } else if (destination.droppableId === "TaskCompletedDroppable") {
             newStatus = "completed"
         }
-
-        console.log(newStatus)
-
         updateTask(add, newStatus);
     }
 

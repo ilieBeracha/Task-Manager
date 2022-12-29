@@ -4,3 +4,11 @@
     display: flex;
     background-color: var(--color1);
 }
+
+@media screen and (max-width: 1000px) {
+    .Main{
+        display: block;
+        /* height: max-content; */
+        height: 100%;
+    }
+}

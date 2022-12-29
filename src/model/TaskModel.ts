@@ -13,7 +13,7 @@ export interface TaskModel{
     taskName:string,
     taskContent:string,
     taskDate:string,
-    // index:number,
+    taskIndex?:number,
     label?:string,
     state?:string,
     taskPriority:string,

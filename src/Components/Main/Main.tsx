@@ -9,7 +9,6 @@ import Dashboard from "./Dashboard/Dashboard";
 import "./Main.css";
 import Navbar from "./Navbar/Navbar";
 import Tasks from "./Tasks/Tasks";
-import TasksBoardOrList from "./TasksBoardOrList/TasksBoardOrList";
 
 function Main(): JSX.Element {
     const tasksSelector = useSelector((state: any) => state.tasks);
@@ -22,13 +21,10 @@ function Main(): JSX.Element {
         tasks = await tasks.json();
         dispatch(getTasksRedux(tasks))
     }
-    console.log(tasksSelector)
     useEffect(() => {
         if (tasksSelector.length === 0) {
             getTasksIfTasksSelectorIsEmpty()
-            console.log('changed')
         }
-        console.log('checked')
     }, [tasksSelector]);
 
 

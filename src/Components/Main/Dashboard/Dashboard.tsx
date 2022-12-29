@@ -1,5 +1,5 @@
 import "./Dashboard.css";
-import DashboardImg from '../../../images/dashboardImg6.png'
+import DashboardImg from '../../../images/dashboardImg9.png'
 import { useEffect, useState } from "react";
 import { getFirstAndLastNameJwt } from "../../../Service/getIdJwt";
 import { useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import { TaskModel } from "../../../model/TaskModel";
 import TodayTask from "./TodayTask/TodayTask";
 import { useDispatch } from "react-redux";
 import { dashBoardFunctions } from "../../../functions/dashboardFunctions";
+import PieChart from "../../PieChart/PieChart";
 
 
 function Dashboard(): JSX.Element {
@@ -40,7 +41,7 @@ function Dashboard(): JSX.Element {
                         {completedTasksAvg ?
                             <div>
                                 <p>You have Completed <span className="DashboardStateColor">{completedTasksAvg.toFixed(0)}% </span>of your tasks!</p>
-                                <p><span> {todo}</span> To Do,<span> {inProgress}</span> In Progress,<span> {completed}</span> Completed</p>
+                                {/* <p><span> {todo}</span> To Do,<span> {inProgress}</span> In Progress,<span> {completed}</span> Completed</p> */}
                                 <p>Keep it up!</p>
                             </div>
                             :
@@ -54,7 +55,7 @@ function Dashboard(): JSX.Element {
                 <div className="DashboardGraphsDiv">
 
                     <div className="DashboardGraphDiv">
-
+                        <PieChart />
                     </div>
 
                     <div className="DashboardTodayDiv">

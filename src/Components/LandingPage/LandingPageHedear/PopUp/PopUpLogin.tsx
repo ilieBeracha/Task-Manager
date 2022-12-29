@@ -41,7 +41,6 @@ function PopUpLogin() {
   const handleClose = () => setOpen(false);
 
   async function saveLoginDetails(user: UsersModel) {
-    console.log(user)
     await apiService.login(user).then(async (res) => {
       if (res.ok) {
         const token =await res.json();
