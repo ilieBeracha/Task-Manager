@@ -15,26 +15,26 @@ class DashBoardFunctions {
         setTodayTasksState([...todayTasks]);
     }
 
-    async filterTasksByStatus(tasksSelector: [], setTodo: any, setInProgress: any, setCompleted: any) {
-        let todoCounter = 0
-        let inProgressCounter = 0
-        let completedCounter = 0
-        tasksSelector.map((task: TaskModel) => {
-            if (task.taskStatus === "todo") {
-                todoCounter++
-            }
-            if (task.taskStatus === "inProgress") {
-                inProgressCounter++
-            }
-            if (task.taskStatus === "completed") {
-                completedCounter++
-            }
+    // async filterTasksByStatus(tasksSelector: [], setTodo: any, setInProgress: any, setCompleted: any) {
+    //     let todoCounter = 0
+    //     let inProgressCounter = 0
+    //     let completedCounter = 0
+    //     tasksSelector.map((task: TaskModel) => {
+    //         if (task.taskStatus === "todo") {
+    //             todoCounter++
+    //         }
+    //         if (task.taskStatus === "inProgress") {
+    //             inProgressCounter++
+    //         }
+    //         if (task.taskStatus === "completed") {
+    //             completedCounter++
+    //         }
 
-        })
-        setTodo(todoCounter);
-        setInProgress(inProgressCounter)
-        setCompleted(completedCounter)
-    }
+    //     })
+    //     setTodo(todoCounter);
+    //     setInProgress(inProgressCounter)
+    //     setCompleted(completedCounter)
+    // }
 
     async  getAvgOfTasksCompleted(tasksSelector:[], setCompletedTasksAvg:any) {
         if (!tasksSelector) return;

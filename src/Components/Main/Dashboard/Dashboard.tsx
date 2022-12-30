@@ -24,7 +24,6 @@ function Dashboard(): JSX.Element {
     useEffect(() => {
         dashBoardFunctions.getNames(setGetName);
         dashBoardFunctions.getAvgOfTasksCompleted(tasksSelector, setCompletedTasksAvg);
-        dashBoardFunctions.filterTasksByStatus(tasksSelector, setTodo, setInProgress, setCompleted);
         dashBoardFunctions.getTodayTasks(tasksSelector, setTodayTasksState, todayTasksState);
         console.log(labelGroup);
         getLabelsGroup()
