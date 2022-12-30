@@ -66,6 +66,7 @@
 }
 
 .DashboardTodayDivHeader {
+    position: relative;
     height: 10%;
     display: flex;
     /* justify-content: center; */
@@ -84,6 +85,36 @@
     width: 100%;
     height: 90%;
     margin: 0 auto;
+    overflow-y: scroll;
+}
+
+.byDayWeekDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* position: absolute; */
+    right: 0;
+    /* width: 20px; */
+}
+
+.byDayWeekDiv a{
+    margin-left:10px;
+    /* background-color: var(--color4); */
+    border: none;
+    font-size: 12px;
+    padding: 5px;
+    border-radius:10px ;
+    cursor: pointer;
+    color: var(--color3);
+}
+
+.byDayWeekDiv a.active{
+    color: white;
+}
+
+.byDayWeekDiv a:hover{
+    background-color: var(--color3);
+    color: white;
 }
 
 .DashboardFooter {
@@ -103,9 +134,13 @@
 }
 
 .DashboardSecondaryDivByLabels{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
     width: 100%;
     height: 90%;
     background-color: aliceblue;
+    
 }
 
 .DashboardSecondaryDivHeader {
@@ -113,7 +148,7 @@
     height: 10%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    background-color: var(--color2);
+    background-color: aliceblue;
     display: flex;
     box-sizing: border-box;
     padding: 20px;
@@ -124,7 +159,8 @@
 .DashboardSecondaryDivHeader h5 {
     margin: 0;
     font-size: 18px;
-    color: white;
+    color: var(--color3);
+    opacity: 4;
 }
 
 .DashboardWelcomeBackImage img {

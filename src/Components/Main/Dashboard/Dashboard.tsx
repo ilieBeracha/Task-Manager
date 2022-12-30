@@ -14,37 +14,15 @@ function Dashboard(): JSX.Element {
     const tasksSelector = useSelector((state: any) => state.tasks);
     const [getName, setGetName] = useState();
     const [completedTasksAvg, setCompletedTasksAvg] = useState<number>();
-    const [todayTasksState, setTodayTasksState] = useState<TaskModel[]>([]);
-    const [labelGroup, setLabelGroup] = useState<[]>([])
-
-    let [todo, setTodo] = useState<number>(0)
-    let [inProgress, setInProgress] = useState<number>(0)
-    let [completed, setCompleted] = useState<number>(0)
+    const [todayOrWeekTasksState, setTodayOrWeekTasksState] = useState<TaskModel[]>([]);
+    const [labelGroup, setLabelGroup] = useState<{ [key: string]: number }>()
 
     useEffect(() => {
         dashBoardFunctions.getNames(setGetName);
         dashBoardFunctions.getAvgOfTasksCompleted(tasksSelector, setCompletedTasksAvg);
-        dashBoardFunctions.getTodayTasks(tasksSelector, setTodayTasksState, todayTasksState);
-        console.log(labelGroup);
-        getLabelsGroup()
+        dashBoardFunctions.getTodayTasks(tasksSelector, setTodayOrWeekTasksState);
+        dashBoardFunctions.getLabelsGroup(tasksSelector,setLabelGroup);
     }, [tasksSelector]);
-
-    function getLabelsGroup() {
-        let arr: any = [];
-        let obj: any = {}
-        tasksSelector.map((t: TaskModel) => {
-            let label: any = t.label
-            if (obj[label]) {
-                obj[label]++
-            } else {
-                obj[label] = 1
-            }
-        });
-        arr.push(obj);
-        setLabelGroup(arr)
-    }
-
-
 
     return (
         <div className="Dashboard">
@@ -63,8 +41,6 @@ function Dashboard(): JSX.Element {
                             </div>
                             :
                             <p>You have Completed <span className="DashboardStateColor">0%</span>of your tasks!</p>
-
-
                         }
                     </div>
                 </div>
@@ -78,11 +54,15 @@ function Dashboard(): JSX.Element {
                     <div className="DashboardTodayDiv">
                         <div className="DashboardTodayDivHeader">
                             <h5>Today Tasks (not completed): </h5>
+                            <div className="byDayWeekDiv">
+                                <a onClick={()=> dashBoardFunctions.getTodayTasks(tasksSelector, setTodayOrWeekTasksState)}>Daily</a>
+                                <a onClick={()=>dashBoardFunctions.getWeekTasks(tasksSelector,setTodayOrWeekTasksState)}>Weekly</a>
+                            </div>
                         </div>
 
                         <div className="DashboardTodayDivTasks">
-                            {todayTasksState.length !== 0 ?
-                                todayTasksState.map((task: TaskModel) => (
+                            {todayOrWeekTasksState.length !== 0 ?
+                                todayOrWeekTasksState.map((task: TaskModel) => (
                                     <TodayTask key={task.id} task={task} />
                                 )) : <div className="DashboardTodayNoTasks">No tasks for today!</div>}
                         </div>
@@ -101,7 +81,11 @@ function Dashboard(): JSX.Element {
                 </div>
 
                 <div className="DashboardSecondaryDivByLabels">
-
+                    {labelGroup ?
+                        Object.keys(labelGroup).map((label: string) => (
+                            <LabelGroup key={label} label={label} counter={labelGroup[label]} />
+                        )) : <div>No labels found</div>
+                    }
                 </div>
             </div>
         </div>

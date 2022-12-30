@@ -17,7 +17,6 @@ function Main(): JSX.Element {
     async function getTasksIfTasksSelectorIsEmpty() {
         const sub = await getIdJwt()
         let tasks = await apiService.getTasks(sub);
-        console.log(tasks)
         tasks = await tasks.json();
         dispatch(getTasksRedux(tasks))
     }

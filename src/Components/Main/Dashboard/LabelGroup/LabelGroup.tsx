@@ -15,6 +15,7 @@ function LabelGroup({ label, counter }: LabelGroupInterface): JSX.Element {
 
             <div className="LabelGroupNumbersOfTasks">
                 <span>{counter}</span>
+                <span>Tasks</span>
             </div>
         </div>
     );

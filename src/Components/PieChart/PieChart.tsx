@@ -38,7 +38,7 @@ function PieChart(): JSX.Element {
         labels: ['To Do', 'In Progress', 'Completed'],
         datasets: [
             {
-                label: 'counter',
+                label: 'tasks',
                 data: [todo, inProgress, completed],
                 backgroundColor: [
                     'orange', '#A75CDA', '#40CC80'

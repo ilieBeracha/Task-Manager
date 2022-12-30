@@ -15,10 +15,6 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
         setRefreshTasks(!refreshTasks)
     }
 
-    useEffect(()=>{
-        console.log(task)
-    },[])
-
     return (
         <Draggable draggableId={task.id.toString()} index={index}>
             {
