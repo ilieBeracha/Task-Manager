@@ -43,12 +43,12 @@ function PopUpLogin() {
   async function saveLoginDetails(user: UsersModel) {
     await apiService.login(user).then(async (res) => {
       if (res.ok) {
-        const token =await res.json();
-        if(token){
-          window.localStorage.setItem('token',token);
+        const token = await res.json();
+        if (token) {
+          window.localStorage.setItem('token', token);
           dispatch(ifUser(true));
           return
-        } 
+        }
       } else {
         alert('User or Password incorrect')
       }
@@ -68,17 +68,15 @@ function PopUpLogin() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Login
           </Typography>
-          {/* <Typography className='PopUpLoginFormDiv' id="modal-modal-description" sx={{ mt: 5 }}> */}
           <div className='PopUpFormDivLogin'>
             <form onSubmit={handleSubmit(saveLoginDetails)} action="">
               <label htmlFor="">Username: </label> <br />
-              <input type="text" {...register('username')} /> <br /> 
+              <input type="text" {...register('username')} /> <br />
               <label htmlFor="">Password: </label> <br />
               <input type="text" {...register('password')} /> <br />
               <button id='PopupLoginBtn'>Login</button>
             </form>
           </div>
-          {/* </Typography> */}
         </Box>
       </Modal>
     </div>

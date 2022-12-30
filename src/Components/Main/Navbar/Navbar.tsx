@@ -23,28 +23,20 @@ function Navbar(): JSX.Element {
                 <TaskAltIcon fontSize="large"/>
             </div>
             <div className="NavbarLinks">
-                
                 <NavLink to={'/'}>
                     <DashboardIcon />
                 </NavLink>
-                <NavLink to={'/wall'}>
+                <NavLink to={'/board'}>
                     <DnsIcon />
                 </NavLink>
                 <NavLink to={'/backlog'}>
-                    {/* <SignalCellularAltIcon /> */}
                     <ListAltIcon />
-
                 </NavLink>
-                {/* <NavLink to={'/profile'}>
-                    <AccountBoxIcon />
-                </NavLink> */}
                 <NavLink to={'/settings'}>
                     <SettingsIcon />
                 </NavLink>
             </div>
             <div className="NavbarLogoutDiv">
-                {/* <span>Dark/Light</span>
-                <input type="checkbox" /> */}
                 <button onClick={()=> signOut()}>Log Out</button>
             </div>
         </div>
