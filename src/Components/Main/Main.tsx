@@ -14,10 +14,10 @@ function Main(): JSX.Element {
     const tasksSelector = useSelector((state: any) => state.tasks);
     const dispatch = useDispatch();
 
-   
     async function getTasksIfTasksSelectorIsEmpty() {
         const sub = await getIdJwt()
         let tasks = await apiService.getTasks(sub);
+        console.log(tasks)
         tasks = await tasks.json();
         dispatch(getTasksRedux(tasks))
     }

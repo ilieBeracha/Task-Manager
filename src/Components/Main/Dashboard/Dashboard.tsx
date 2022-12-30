@@ -84,7 +84,7 @@ function Dashboard(): JSX.Element {
                         <div className="DashboardTodayDivTasks">
                             {todayTasksState.length !== 0 ?
                                 todayTasksState.map((task: TaskModel) => (
-                                    <TodayTask key={task.taskId} task={task} />
+                                    <TodayTask key={task.id} task={task} />
                                 )) : <div className="DashboardTodayNoTasks">No tasks for today!</div>}
                         </div>
                     </div>

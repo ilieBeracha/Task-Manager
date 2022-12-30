@@ -33,7 +33,7 @@ function Backlog(): JSX.Element {
                 </div>
                 {
                     tasksSelector.map((task: TaskModel) =>
-                        <TasksBacklog key={task.taskId} task={task} />
+                        <TasksBacklog key={task.id} task={task} />
                     )
                 }
             </div>

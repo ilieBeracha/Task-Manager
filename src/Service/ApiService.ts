@@ -4,7 +4,7 @@ import axios from 'axios';
 class ApiService {
     async login(user: UsersModel) {
         const userJson = JSON.stringify(user)
-        const person = await fetch('http://localhost:3050/api/users/login', {
+        const person = await fetch('http://localhost:3050/users/login', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -17,7 +17,7 @@ class ApiService {
 
     async register(user: UsersModel) {
         const userJson = JSON.stringify(user)
-        const person = await fetch('http://localhost:3050/api/users/register', {
+        const person = await fetch('http://localhost:3050/users/register', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ class ApiService {
 
 
     async getTasks(id: number) {
-        const task = await fetch(`http://localhost:3050/api/users/tasks/${id}`, {
+        const task = await fetch(`http://localhost:3050/users/tasks/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -41,23 +41,10 @@ class ApiService {
 
     }
 
-    // async AddNewTask(id: number, taskBody: TaskModel) {
-    //     const taskBodyString = JSON.stringify(taskBody)
-    //     await fetch(`http://localhost:3050/api/users/tasks/add/${id}`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         mode: 'cors',
-    //         body: taskBodyString
-    //     })
-    // }
-
-
     async AddNewTask(id: number, taskBody: TaskModel) {
         try {
             const taskBodyString = JSON.stringify(taskBody)
-            const response = await axios.post(`http://localhost:3050/api/users/tasks/add/${id}`, taskBodyString, {
+            const response = await axios.post(`http://localhost:3050/users/tasks/add/${id}`, taskBodyString, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -68,8 +55,8 @@ class ApiService {
         }
     }
 
-    async deleteTask(Taskid: string, userId: string) {
-        const response = await fetch(`http://localhost:3050/api/users/tasks/delete/${Taskid}/${userId}`, {
+    async deleteTask(Taskid: number) {
+        const response = await fetch(`http://localhost:3050/users/tasks/delete/${Taskid}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -77,9 +64,10 @@ class ApiService {
         })
     }
 
-    async updateTask(sub:any,task:TaskModel) {
+    async updateTask(task:TaskModel) {
+        const taskId = task.id
         const taskStringify = JSON.stringify(task)
-        const response = await fetch(`http://localhost:3050/api/users/tasks/update/${sub}`, {
+        const response = await fetch(`http://localhost:3050/users/tasks/update/${taskId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
