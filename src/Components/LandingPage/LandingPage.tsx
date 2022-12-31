@@ -21,7 +21,7 @@ function LandingPage(): JSX.Element {
     //         setTitleDisplayed(newTitle);
     //         console.log(newTitle)
     //         i++;
-            
+
     //         if (i >= title.length) {
     //             // getSingleLetter()
     //         }
@@ -37,7 +37,10 @@ function LandingPage(): JSX.Element {
             <div className="LandingPageAll">
 
                 <div className="LandingPageContent">
-                    <h1>{title}</h1>
+                    <div className="LandingPageContentHeader">
+
+                        <h1>{title}</h1>
+                    </div>
                     <h2>Your personal <span id="TaskManagerTitle">Task-Manager</span> </h2>
                     <span>Our intuitive interface allows you to create, edit, and delete tasks with ease, making it simple to manage your tasks and get things done.</span>
                 </div>

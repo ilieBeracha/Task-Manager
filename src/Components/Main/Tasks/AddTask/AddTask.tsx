@@ -52,7 +52,7 @@ function AddTask({ refreshTasks, setRefreshTasks }: any) {
         setRefreshTasks(!refreshTasks)
         handleClose();
         toastMessAddTask();
-        const sub = await getIdJwt()
+        const sub = await getIdJwt();
         await apiService.AddNewTask(sub, task).then((res)=>{
             if(res.status===401){
                 window.localStorage.removeItem('token');

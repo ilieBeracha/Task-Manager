@@ -70,7 +70,6 @@ function Tasks(): JSX.Element {
 
         setTodo(todoTasks);
         setInProgress(inProgressTasks);
-        setCompleted(completedTasks);
 
         let newStatus: string = add.newStatus;
         if (destination.droppableId === "TasksTodoDroppable") {
@@ -84,9 +83,14 @@ function Tasks(): JSX.Element {
     }
 
     async function updateTask(task: TaskModel, newStatus: string) {
-        // const sub = await getIdJwt();
         const updatedTask = { ...task };
-        updatedTask.taskStatus = newStatus
+        // console.log(updatedTask)
+        const newTasks = tasksSelector.filter((t: TaskModel) => {
+            return t.id !== updatedTask.id
+        })
+        newTasks.push(updatedTask);
+        updatedTask.taskStatus = newStatus;
+        dispatch(getTasksRedux(newTasks))
         await apiService.updateTask(updatedTask);
     }
 
@@ -129,7 +133,7 @@ function Tasks(): JSX.Element {
                             (provided) => (
                                 <div className="TasksDiv TasksInProgress" ref={provided.innerRef} {...provided.droppableProps}>
                                     <div className="TasksDivTitle">
-                                    <span className="dot dotInProgress"></span>
+                                        <span className="dot dotInProgress"></span>
                                         <h5>In Progress</h5>
                                     </div>
 
@@ -153,7 +157,7 @@ function Tasks(): JSX.Element {
                             (provided) => (
                                 <div className="TasksDiv TasksCompleted" ref={provided.innerRef} {...provided.droppableProps}>
                                     <div className="TasksDivTitle">
-                                    <span className="dot dotCompleted"></span>
+                                        <span className="dot dotCompleted"></span>
                                         <h5>Completed</h5>
                                     </div>
 

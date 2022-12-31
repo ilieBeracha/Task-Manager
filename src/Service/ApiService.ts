@@ -1,10 +1,10 @@
 import { TaskModel, UsersModel } from "../model/TaskModel"
 import axios from 'axios';
+
 function getToken() {
     let token = window.localStorage.getItem('token');
     return token
 }
-getToken()
 
 class ApiService {
     async login(user: UsersModel) {
@@ -45,23 +45,18 @@ class ApiService {
             mode: 'cors',
         })
         return task;
-
     }
 
     async AddNewTask(id: number, taskBody: TaskModel) {
         let token = getToken()
-        // try {
-            const taskBodyString = JSON.stringify(taskBody)
-            const response = await axios.post(`http://localhost:3080/users/tasks/add/${id}`, taskBodyString, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            return response;
-        // } catch (error) {
-        //     console.error(error);
-        // }
+        const taskBodyString = JSON.stringify(taskBody)
+        const response = await axios.post(`http://localhost:3080/users/tasks/add/${id}`, taskBodyString, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return response;
     }
 
     async deleteTask(Taskid: number) {
