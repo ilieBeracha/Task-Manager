@@ -9,6 +9,8 @@ import { UsersModel } from '../../../../model/TaskModel';
 import { apiService } from '../../../../Service/ApiService';
 import { useDispatch, useSelector } from 'react-redux';
 import { ifUser } from '../../../../app/usersSlice';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -20,17 +22,17 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-// function toastMess() {
-//   toast.error('User or Password incorrect', {
-//       position: toast.POSITION.TOP_CENTER,
-//       className: 'discoverToast',
-//       theme: "colored",
-//       // hideProgressBar:true,
-//       closeOnClick: true,
-//       draggable: true,
-//       pauseOnHover: false,
-//   })
-// }
+
+function toastMessIncorrectDetails() {
+  toast.error('User or Password incorrect', {
+      position: toast.POSITION.TOP_CENTER,
+      className: 'SignInAgainToast',
+      theme: "colored",
+      closeOnClick: true,
+      draggable: true,
+      pauseOnHover: false,
+  })
+}
 
 function PopUpLogin() {
   const { register, handleSubmit, formState: { errors } } = useForm<UsersModel>();
@@ -50,7 +52,7 @@ function PopUpLogin() {
           return
         }
       } else {
-        alert('User or Password incorrect')
+        toastMessIncorrectDetails();
       }
     })
   }

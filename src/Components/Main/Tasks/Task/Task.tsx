@@ -6,12 +6,20 @@ import { getIdJwt } from "../../../../Service/getIdJwt";
 import { Draggable } from "react-beautiful-dnd";
 import EditTaskPopUp from "./editTaskPopup/editTaskPopup";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { ifUser } from "../../../../app/usersSlice";
 
 function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: { task: TaskModel, index: number, setRefreshTasks: any, refreshTasks: any }): JSX.Element {
+    const dispatch = useDispatch();
 
     async function deleteTask() {
         const userId = await getIdJwt();
-        apiService.deleteTask(task.id);
+        apiService.deleteTask(task.id).then((res) => {
+            if (res.status===401) {
+                window.localStorage.removeItem('token');
+                dispatch(ifUser(false))
+            }
+        });
         setRefreshTasks(!refreshTasks)
     }
 
@@ -24,7 +32,7 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
                             <CloseIcon fontSize="small" />
                         </div>
                         <div className='editTaskDiv'>
-                            <EditTaskPopUp refreshTasks={refreshTasks} setRefreshTasks={setRefreshTasks} id={task.id} task={task}/>
+                            <EditTaskPopUp refreshTasks={refreshTasks} setRefreshTasks={setRefreshTasks} id={task.id} task={task} />
                         </div>
                         <div className="TaskName">
                             <h5>{task.taskName}</h5>

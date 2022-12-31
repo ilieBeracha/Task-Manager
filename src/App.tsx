@@ -6,6 +6,7 @@ import LandingPage from './Components/LandingPage/LandingPage';
 import Main from './Components/Main/Main';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { ifUser } from './app/usersSlice';
+import { ToastContainer } from 'react-toastify'
 
 function App() {
   const loggedSelector = useSelector((state: any) => state.logged);

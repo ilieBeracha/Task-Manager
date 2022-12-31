@@ -10,6 +10,10 @@ import { getIdJwt } from '../../../../Service/getIdJwt';
 import './AddTask.css'
 import { useEffect, useState } from 'react';
 import { labelsArr } from '../../../../Service/labels';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ifUser } from '../../../../app/usersSlice';
+
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -22,9 +26,20 @@ const style = {
     p: 4,
 };
 
+function toastMessAddTask() {
+    toast.success('Added Task', {
+        position: toast.POSITION.TOP_CENTER,
+        className: 'AddTaskToast',
+        theme: "colored",
+        closeOnClick: true,
+        draggable: true,
+        pauseOnHover: false,
+    })
+}
+
 function AddTask({ refreshTasks, setRefreshTasks }: any) {
     const [labels, setLabels] = useState<any>(labelsArr);
-    const [selectedLabel,setSelectedLabel] = useState()
+    const [selectedLabel, setSelectedLabel] = useState()
     const { register, handleSubmit, formState: { errors } } = useForm<TaskModel>();
     const loginSelector = useSelector((state: any) => state.logged);
     const dispatch = useDispatch();
@@ -36,14 +51,15 @@ function AddTask({ refreshTasks, setRefreshTasks }: any) {
     async function saveTask(task: TaskModel) {
         setRefreshTasks(!refreshTasks)
         handleClose();
+        toastMessAddTask();
         const sub = await getIdJwt()
-        await apiService.AddNewTask(sub, task).catch(e => console.log(e));
+        await apiService.AddNewTask(sub, task).then((res)=>{
+            if(res.status===401){
+                window.localStorage.removeItem('token');
+                dispatch(ifUser(false));
+            }
+        });
     }
-
-    // useEffect(() => {
-    //     console.log(labels)
-    //     console.log(selectedLabel)
-    // }, [])
 
     return (
         <div className='AddTask'>
@@ -80,12 +96,12 @@ function AddTask({ refreshTasks, setRefreshTasks }: any) {
                                     <option value="inProgress">In Progress</option>
                                     <option value="completed">Completed</option>
                                 </select>
-                                
+
                                 <button type='submit' className='PopupAddTask'>Add</button>
                             </div>
-                             <div className='popUpTagsDiv'>
+                            <div className='popUpTagsDiv'>
                                 <h5>Labels: </h5>
-                                <select  id=""{...register('label')}>
+                                <select id=""{...register('label')}>
                                     <option value="">None</option>
                                     <option value="Work">Work</option>
                                     <option value="Personal">Personal</option>
@@ -94,7 +110,7 @@ function AddTask({ refreshTasks, setRefreshTasks }: any) {
                                     <option value="Financial">Financial</option>
                                     <option value="Leisure">Leisure</option>
                                 </select>
-                            </div> 
+                            </div>
                         </form>
                     </div>
                 </Box>

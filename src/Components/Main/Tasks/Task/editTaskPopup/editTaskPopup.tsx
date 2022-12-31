@@ -10,6 +10,8 @@ import { TaskModel } from '../../../../../model/TaskModel';
 import { apiService } from '../../../../../Service/ApiService';
 import { getIdJwt } from '../../../../../Service/getIdJwt';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { ifUser } from '../../../../../app/usersSlice';
 
 
 const style = {
@@ -29,13 +31,18 @@ function EditTaskPopUp({ task, id, refreshTasks, setRefreshTasks }: { task: Task
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const dispatch = useDispatch()
 
     async function editTask(taskEdit: TaskModel) {
         setRefreshTasks(!refreshTasks)
         handleClose();
         taskEdit.id = id;
-        // const sub = await getIdJwt();
-        await apiService.updateTask(taskEdit).catch(e => console.log(e));
+        await apiService.updateTask(taskEdit).then((res) => {
+            if (res.status===401) {
+                window.localStorage.removeItem('token');
+                dispatch(ifUser(false));
+            }
+        });
         setRefreshTasks(!refreshTasks);
     }
 
