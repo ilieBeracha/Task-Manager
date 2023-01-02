@@ -18,6 +18,8 @@ export interface TaskModel{
     state?:string,
     taskPriority:string,
     id:number,
-    taskStatus: string
+    taskStatus: string,
+    indexPriority:number,
+    indexPriorityTimeStamp:number
 }
 

@@ -25,25 +25,17 @@ const style = {
     p: 4,
 };
 
-
 function EditTaskPopUp({ task, id, refreshTasks, setRefreshTasks }: { task: TaskModel, id: any, refreshTasks: any, setRefreshTasks: any }) {
     const { register, handleSubmit, formState: { errors } } = useForm<TaskModel>();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const dispatch = useDispatch()
 
     async function editTask(taskEdit: TaskModel) {
         setRefreshTasks(!refreshTasks)
         handleClose();
         taskEdit.id = id;
-        await apiService.updateTask(taskEdit).then((res) => {
-            if (res.status===401) {
-                window.localStorage.removeItem('token');
-                dispatch(ifUser(false));
-            }
-        });
-        setRefreshTasks(!refreshTasks);
+        await apiService.updateTask(taskEdit)
     }
 
     return (

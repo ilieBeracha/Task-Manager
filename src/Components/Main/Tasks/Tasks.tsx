@@ -50,50 +50,50 @@ function Tasks(): JSX.Element {
         let completedTasks = completed
 
         if (source.droppableId === "TasksTodoDroppable") {
-            add = todoTasks[source.index]
-            todoTasks.splice(source.index, 1)
+            add = todoTasks[source.index];
+            todoTasks.splice(source.index, 1);
         } else if (source.droppableId === "TasksInProgressDroppable") {
-            add = inProgressTasks[source.index]
-            inProgressTasks.splice(source.index, 1)
+            add = inProgressTasks[source.index];
+            inProgressTasks.splice(source.index, 1);
         } else if (source.droppableId === "TaskCompletedDroppable") {
-            add = completedTasks[source.index]
-            completedTasks.splice(source.index, 1)
+            add = completedTasks[source.index];
+            completedTasks.splice(source.index, 1);
         }
+        let newStatus: string = add.newStatus;
 
         if (destination.droppableId === "TasksTodoDroppable") {
+            const timeStamp = new Date().getTime();            
+            newStatus = "todo"
             todoTasks.splice(destination.index, 0, add)
+            updateTaskIndex(add,destination.index,timeStamp,newStatus)
         } else if (destination.droppableId === "TasksInProgressDroppable") {
-            inProgressTasks.splice(destination.index, 0, add)
+            const timeStamp = new Date().getTime();
+            newStatus = "inProgress"
+            inProgressTasks.splice(destination.index, 0, add);
+            updateTaskIndex(add,destination.index,timeStamp,newStatus)
         } else if (destination.droppableId === "TaskCompletedDroppable") {
-            completedTasks.splice(destination.index, 0, add)
+            const timeStamp = new Date().getTime();
+            newStatus = "completed"
+            completedTasks.splice(destination.index, 0, add);
+            updateTaskIndex(add,destination.index,timeStamp,newStatus)
         }
 
         setTodo(todoTasks);
         setInProgress(inProgressTasks);
-
-        let newStatus: string = add.newStatus;
-        if (destination.droppableId === "TasksTodoDroppable") {
-            newStatus = "todo"
-        } else if (destination.droppableId === "TasksInProgressDroppable") {
-            newStatus = "inProgress"
-        } else if (destination.droppableId === "TaskCompletedDroppable") {
-            newStatus = "completed"
-        }
-        updateTask(add, newStatus);
     }
 
-    async function updateTask(task: TaskModel, newStatus: string) {
-        const updatedTask = { ...task };
-        // console.log(updatedTask)
-        const newTasks = tasksSelector.filter((t: TaskModel) => {
+    async function updateTaskIndex(task:TaskModel, index:number,timeStamp:number,newStatus:string){
+        const updatedTask = {...task};
+        updatedTask.indexPriority = index;
+        updatedTask.indexPriorityTimeStamp = timeStamp;
+        const newTasks =await tasksSelector.filter((t: TaskModel) => {
             return t.id !== updatedTask.id
         })
-        newTasks.push(updatedTask);
         updatedTask.taskStatus = newStatus;
+        newTasks.push(updatedTask);
         dispatch(getTasksRedux(newTasks))
         await apiService.updateTask(updatedTask);
     }
-
 
     return (
         <div className="Tasks" >

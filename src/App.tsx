@@ -9,25 +9,29 @@ import { ifUser } from './app/usersSlice';
 import { ToastContainer } from 'react-toastify'
 
 function App() {
-  const loggedSelector = useSelector((state: any) => state.logged);
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    const token = window.localStorage.getItem('token');
-    if(token){
-      dispatch(ifUser(true))
-    } else{
-      dispatch(ifUser(false))
-    }
-  },[])
- 
+  // const loggedSelector = useSelector((state: any) => state.logged);
+  const authSelector = useSelector((state: any) => state.auth);
+  console.log(authSelector)
+  // const dispatch = useDispatch()
+  // useEffect(() => {
+  //   const token = window.localStorage.getItem('token');
+  //   if (token) {
+  //     dispatch(ifUser(true))
+  //   } else {
+  //     dispatch(ifUser(false))
+  //   }
+  // }, [])
+
   return (
     <div className="App">
       <div className='overlay'></div>
       <Routes>
         {
-          loggedSelector === false ?
+          authSelector ?
+            <Route path='*' element={<Main />}></Route>
+            :
             <Route path='*' element={<LandingPage />}></Route>
-            : <Route path='*' element={<Main />}></Route>
+
         }
       </Routes>
     </div>

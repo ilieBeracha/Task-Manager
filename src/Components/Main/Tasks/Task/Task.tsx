@@ -10,16 +10,9 @@ import { useDispatch } from "react-redux";
 import { ifUser } from "../../../../app/usersSlice";
 
 function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: { task: TaskModel, index: number, setRefreshTasks: any, refreshTasks: any }): JSX.Element {
-    const dispatch = useDispatch();
-
+    
     async function deleteTask() {
-        const userId = await getIdJwt();
-        apiService.deleteTask(task.id).then((res) => {
-            if (res.status===401) {
-                window.localStorage.removeItem('token');
-                dispatch(ifUser(false))
-            }
-        });
+        apiService.deleteTask(task.id)
         setRefreshTasks(!refreshTasks)
     }
 

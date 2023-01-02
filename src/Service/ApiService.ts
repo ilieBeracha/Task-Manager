@@ -1,12 +1,35 @@
 import { TaskModel, UsersModel } from "../model/TaskModel"
 import axios from 'axios';
+import { store } from '../app/store';
+import { ifUser } from "../app/usersSlice";
+import { toast } from "react-toastify";
+
+function toastMessSignInAgain() {
+    toast.error('Please sign in again', {
+        position: toast.POSITION.TOP_CENTER,
+        className: 'SignInAgainToast',
+        theme: "colored",
+        closeOnClick: true,
+        draggable: true,
+        pauseOnHover: false,
+    })
+}
 
 function getToken() {
     let token = window.localStorage.getItem('token');
-    return token
+    return token;
 }
 
 class ApiService {
+    constructor() {
+        axios.interceptors.response.use((response) => response, (error) => {
+            if (error.response.status === 401) {
+                toastMessSignInAgain()
+                window.localStorage.removeItem('token');
+                store.dispatch(ifUser(false));
+            }
+        });
+    }
     async login(user: UsersModel) {
         const userJson = JSON.stringify(user)
         const person = await fetch('http://localhost:3080/users/login', {
@@ -33,19 +56,18 @@ class ApiService {
         return person;
     }
 
-
     async getTasks(id: number) {
-        let token = getToken()
-        const task = await fetch(`http://localhost:3080/users/tasks/${id}`, {
-            method: 'GET',
+        let token = getToken();
+        const response = await axios.get(`http://localhost:3080/users/tasks/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`,
             },
-            mode: 'cors',
-        })
-        return task;
+        });
+        console.log(response.data)
+        return response.data;
     }
+
 
     async AddNewTask(id: number, taskBody: TaskModel) {
         let token = getToken()
@@ -56,39 +78,36 @@ class ApiService {
                 'Authorization': `Bearer ${token}`
             }
         });
-        return response;
     }
 
     async deleteTask(Taskid: number) {
         let token = getToken()
-        const response = await fetch(`http://localhost:3080/users/tasks/delete/${Taskid}`, {
+        const response = await axios.delete(`http://localhost:3080/users/tasks/delete/${Taskid}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
         })
-        return response;
     }
 
     async updateTask(task: TaskModel) {
         let token = getToken()
+        console.log(task.indexPriority)
         const taskId = task.id
         const taskStringify = JSON.stringify(task)
-        const response = await fetch(`http://localhost:3080/users/tasks/update/${taskId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: taskStringify
-        })
+        const response = await axios.put(`http://localhost:3080/users/tasks/update/${taskId}`,
+            taskStringify,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+            }
+        )
+        console.log(response)
         return response;
     }
-
-
-
-
 }
 
 export const apiService = new ApiService

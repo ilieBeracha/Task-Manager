@@ -16,13 +16,13 @@ function Dashboard(): JSX.Element {
     const [completedTasksAvg, setCompletedTasksAvg] = useState<number>();
     const [todayOrWeekTasksState, setTodayOrWeekTasksState] = useState<TaskModel[]>([]);
     const [labelGroup, setLabelGroup] = useState<{ [key: string]: number }>()
-
+    const authSelector = useSelector((state: any) => state.auth)
     useEffect(() => {
         dashBoardFunctions.getNames(setGetName);
         dashBoardFunctions.getAvgOfTasksCompleted(tasksSelector, setCompletedTasksAvg);
         dashBoardFunctions.getTodayTasks(tasksSelector, setTodayOrWeekTasksState);
-        dashBoardFunctions.getLabelsGroup(tasksSelector,setLabelGroup);
-    }, [tasksSelector]);
+        dashBoardFunctions.getLabelsGroup(tasksSelector, setLabelGroup);
+    }, [tasksSelector, authSelector]);
 
     return (
         <div className="Dashboard">
@@ -53,10 +53,10 @@ function Dashboard(): JSX.Element {
 
                     <div className="DashboardTodayDiv">
                         <div className="DashboardTodayDivHeader">
-                            <h5>Today Tasks (not completed): </h5>
+                            <h5>Tasks (not completed): </h5>
                             <div className="byDayWeekDiv">
-                                <a onClick={()=> dashBoardFunctions.getTodayTasks(tasksSelector, setTodayOrWeekTasksState)}>Daily</a>
-                                <a onClick={()=>dashBoardFunctions.getWeekTasks(tasksSelector,setTodayOrWeekTasksState)}>Weekly</a>
+                                <a onClick={() => dashBoardFunctions.getTodayTasks(tasksSelector, setTodayOrWeekTasksState)}>Daily</a>
+                                <a onClick={() => dashBoardFunctions.getWeekTasks(tasksSelector, setTodayOrWeekTasksState)}>Weekly</a>
                             </div>
                         </div>
 

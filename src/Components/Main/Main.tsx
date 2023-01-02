@@ -17,31 +17,14 @@ function Main(): JSX.Element {
     const tasksSelector = useSelector((state: any) => state.tasks);
     const dispatch = useDispatch();
 
-    function toastMessSignInAgain() {
-        toast.error('Please sign in again', {
-            position: toast.POSITION.TOP_CENTER,
-            className: 'SignInAgainToast',
-            theme: "colored",
-            closeOnClick: true,
-            draggable: true,
-            pauseOnHover: false,
-        })
-    }
 
     async function getTasksIfTasksSelectorIsEmpty() {
         const sub = await getIdJwt()
-        await apiService.getTasks(sub).then(async (res) => {
-            if (res.ok) {
-                let results = await res.json()
-                console.log(results);
-                dispatch(getTasksRedux(results));
-            } else if(res.status===401){
-                window.localStorage.removeItem('token');
-                dispatch(ifUser(false))
-                toastMessSignInAgain()
-            }
-        });
+        let res= await apiService.getTasks(sub);
+        console.log(res)
+        dispatch(getTasksRedux(res))
     }
+    
     useEffect(() => {
         getTasksIfTasksSelectorIsEmpty()
     }, []);

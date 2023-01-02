@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ifUser } from '../../../../app/usersSlice';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import { useState } from 'react';
+import { login } from '../../../../app/authSlice (1)';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -25,12 +27,12 @@ const style = {
 
 function toastMessIncorrectDetails() {
   toast.error('User or Password incorrect', {
-      position: toast.POSITION.TOP_CENTER,
-      className: 'SignInAgainToast',
-      theme: "colored",
-      closeOnClick: true,
-      draggable: true,
-      pauseOnHover: false,
+    position: toast.POSITION.TOP_CENTER,
+    className: 'SignInAgainToast',
+    theme: "colored",
+    closeOnClick: true,
+    draggable: true,
+    pauseOnHover: false,
   })
 }
 
@@ -38,24 +40,33 @@ function PopUpLogin() {
   const { register, handleSubmit, formState: { errors } } = useForm<UsersModel>();
   const loginSelector = useSelector((state: any) => state.logged);
   const dispatch = useDispatch();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   async function saveLoginDetails(user: UsersModel) {
-    await apiService.login(user).then(async (res) => {
+    await apiService.login(user).then(async (res: any) => {
       if (res.ok) {
-        const token = await res.json();
-        if (token) {
-          window.localStorage.setItem('token', token);
-          dispatch(ifUser(true));
-          return
-        }
+        let token = await res.json()
+        console.log(token)
+        dispatch(login(token));
+        // dispatch(ifUser(true));
       } else {
         toastMessIncorrectDetails();
       }
     })
   }
+
+  // if (res.ok) {
+  //   const token = await res.json();
+  //   if (token) {
+  //     window.localStorage.setItem('token', token);
+  //     dispatch(ifUser(true));
+  //     return
+  //   }
+  // } else {
+  //   toastMessIncorrectDetails();
+  // }
 
   return (
     <div>

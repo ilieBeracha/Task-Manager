@@ -3,19 +3,21 @@ import { getFirstAndLastNameJwt } from "../Service/getIdJwt";
 
 class DashBoardFunctions {
     async getTodayTasks(tasksSelector: [], setTodayTasksState: any) {
-        let date = new Date().getDate()
-        let mon = new Date().getMonth() + 1
-        let year = new Date().getFullYear()
-        const todayDate = `${year}-${mon}-${date}`
+        let today = new Date();
+        let year = today.getFullYear();
+        let month = String(today.getMonth() + 1).padStart(2, "0");
+        let date = String(today.getDate()).padStart(2, "0");
+        let todayDate = `${year}-${month}-${date}`;
 
         let todayTasks = tasksSelector.filter((task: TaskModel) => {
+            console.log(task.taskDate)
             return task.taskDate === todayDate && task.taskStatus !== 'completed'
         });
 
         setTodayTasksState([...todayTasks]);
     }
 
-    getLabelsGroup(tasksSelector:[],setLabelGroup:any) {
+    getLabelsGroup(tasksSelector: [], setLabelGroup: any) {
         let labelCounts: { [key: string]: number } = {};
         tasksSelector.forEach((t: TaskModel) => {
             if (labelCounts[t.label]) {
@@ -27,12 +29,13 @@ class DashBoardFunctions {
         setLabelGroup(labelCounts);
     }
 
-    async getWeekTasks(tasksSelector:[], setTodayTasksState:any) {
-        let date = new Date().getDate()
-        let mon = new Date().getMonth() + 1
-        let year = new Date().getFullYear()
-        const todayDate = `${year}-${mon}-${date}`
-        console.log(todayDate)
+    async getWeekTasks(tasksSelector: [], setTodayTasksState: any) {
+        let today = new Date();
+        let year = today.getFullYear();
+        let month = String(today.getMonth() + 1).padStart(2, "0");
+        let date = String(today.getDate()).padStart(2, "0");
+        let todayDate = `${year}-${month}-${date}`;
+
 
         let firstDayOfWeek = new Date(todayDate);
         firstDayOfWeek.setDate(firstDayOfWeek.getDate() - firstDayOfWeek.getDay() + 1);
@@ -48,9 +51,9 @@ class DashBoardFunctions {
         setTodayTasksState(weekTasks)
     }
 
-    
 
-    async  getAvgOfTasksCompleted(tasksSelector:[], setCompletedTasksAvg:any) {
+
+    async getAvgOfTasksCompleted(tasksSelector: [], setCompletedTasksAvg: any) {
         if (!tasksSelector) return;
         let counterOfTasks = tasksSelector.length;
         let counterOfCompletedTasks = 0;
@@ -63,7 +66,7 @@ class DashBoardFunctions {
         setCompletedTasksAvg(percentageCompleted);
     }
 
-    async getNames(setGetName:any) {
+    async getNames(setGetName: any) {
         let firstName = await getFirstAndLastNameJwt();
         setGetName(firstName.toLocaleUpperCase())
     }

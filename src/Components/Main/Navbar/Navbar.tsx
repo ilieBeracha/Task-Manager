@@ -9,12 +9,15 @@ import { useDispatch } from "react-redux";
 import { ifUser } from "../../../app/usersSlice";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import DnsIcon from '@mui/icons-material/Dns';
+import { logout } from "../../../app/authSlice (1)";
 function Navbar(): JSX.Element {
     const dispatch = useDispatch()
 
     function signOut(){
-        window.localStorage.removeItem('token');
-        dispatch(ifUser(false))
+        // window.localStorage.removeItem('token');
+        // dispatch(ifUser(false))
+        
+        dispatch(logout())
     }
 
     return (
