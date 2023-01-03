@@ -104,32 +104,32 @@
 }
 
 .TaskLabelWork {
-  background-color: var(--color2);
+  background-color: var(--workLabel);
 }
 
 .TaskLabelPersonal {
-  background-color: rgb(85, 85, 251);
+  background-color: var(--personalLabel);
   /* opacity: 0.7; */
   color: white;
 }
 
 .TaskLabelHome {
-  background-color: brown;
+  background-color: var(--homeLabel);
   color: white;
 }
 
 .TaskLabelSchool {
-  background-color: plum;
+  background-color: var(--schoolLabel);
   color: white;
 }
 
 .TaskLabelFinancial {
-  background-color: green;
+  background-color: var(--financialLabel);
   color: white;
 }
 
 .TaskLabelLeisure {
-  background-color: salmon;
+  background-color: var(--leisureLabel);
   color: white;
 
 }

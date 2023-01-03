@@ -79,7 +79,6 @@ function EditTaskPopUp({ task, id, refreshTasks, setRefreshTasks }: { task: Task
                             <div className='popUpTagsDiv'>
                                 <h5>Labels: </h5>
                                 <select defaultValue={task.label} id=""{...register('label')}>
-                                    <option value="">None</option>
                                     <option value="Work">Work</option>
                                     <option value="Personal">Personal</option>
                                     <option value="Home">Home</option>

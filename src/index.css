@@ -9,6 +9,12 @@ body {
   --color3: #497174;
   --color4: #FF725E;
   --color5: #EB6440;
+  --workLabel:#D6E4E5;
+  --financialLabel:green;
+  --schoolLabel:plum;
+  --personalLabel:rgb(85, 85, 251);
+  --homeLabel:brown;
+  --leisureLabel:salmon;
   font-family: 'Anybody', cursive;
   font-family: 'Assistant', sans-serif;
   font-family: 'Epilogue', sans-serif;

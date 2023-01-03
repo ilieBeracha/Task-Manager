@@ -97,7 +97,6 @@ function AddTask({ refreshTasks, setRefreshTasks }: any) {
                             <div className='popUpTagsDiv'>
                                 <h5>Labels: </h5>
                                 <select id=""{...register('label')}>
-                                    <option value="">None</option>
                                     <option value="Work">Work</option>
                                     <option value="Personal">Personal</option>
                                     <option value="Home">Home</option>
