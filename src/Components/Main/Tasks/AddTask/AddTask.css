@@ -68,7 +68,7 @@
     border: none;
     font-size: 14px;
     /* padding: 8px 15px 8px 15px; */
-    color: white;
+    color: var(--color6);
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 5px;

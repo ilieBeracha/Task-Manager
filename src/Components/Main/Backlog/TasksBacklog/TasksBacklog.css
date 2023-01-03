@@ -5,7 +5,7 @@
     height: 8%;
     align-items: center;
     /* background-color: var(--color1); */
-    background-color: white;
+    background-color: var(--color6);
     border: 1px solid lightgray;
     /* margin: 0 auto; */
 }

@@ -44,48 +44,48 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
                         <div className="TaskName">
                             <h5>{task.taskName}</h5>
                         </div>
-                        <div className="TaskContent">
-                            <span>{task.taskContent}</span>
-                        </div>
                         {
                             task.label === "Work" ?
                                 <div className="TaskLabel TaskLabelWork">
-                                    <span>W</span>
+                                    <span>{task.label}</span>
                                 </div>
                                 : task.label === "Personal" ?
                                     <div className="TaskLabel TaskLabelPersonal">
-                                        <span>P</span>
+                                        <span>{task.label}</span>
                                     </div>
                                     :
                                     task.label === "Home" ?
                                         <div className="TaskLabel TaskLabelHome">
-                                            <span>H</span>
+                                            <span>{task.label}</span>
                                         </div>
                                         :
                                         task.label === "School" ?
                                             <div className="TaskLabel TaskLabelSchool">
-                                                <span>S</span>
+                                                <span>{task.label}</span>
                                             </div>
                                             :
                                             task.label === "Financial" ?
                                                 <div className="TaskLabel TaskLabelFinancial">
-                                                    <span>F</span>
+                                                    <span>{task.label}</span>
                                                 </div>
                                                 :
                                                 task.label === "Health" ?
                                                     <div className="TaskLabel TaskLabelHealth">
-                                                        <span>H</span>
+                                                        <span>{task.label}</span>
                                                     </div>
                                                     :
                                                     task.label === "Leisure" ?
                                                         <div className="TaskLabel TaskLabelLeisure">
-                                                            <span>L</span>
+                                                            <span>{task.label}</span>
                                                         </div>
                                                         :
                                                         <div className="TaskLabel">
                                                             <span>{task.label}</span>
                                                         </div>
                         }
+                        <div className="TaskContent">
+                            <span>{task.taskContent}</span>
+                        </div>
                         <div className="TaskDate">
                             <span>{task.taskDate}</span> <br />
                             <span>{remainingDays} days remaining!</span>

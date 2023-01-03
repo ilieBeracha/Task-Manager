@@ -4,26 +4,15 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import LandingPage from './Components/LandingPage/LandingPage';
 import Main from './Components/Main/Main';
-import { useDispatch, useSelector } from 'react-redux/es/exports';
-import { ifUser } from './app/usersSlice';
-import { ToastContainer } from 'react-toastify'
+import { useSelector } from 'react-redux/es/exports';
+
 
 function App() {
-  // const loggedSelector = useSelector((state: any) => state.logged);
+  const mode = useSelector((state: any) => state.mode);
   const authSelector = useSelector((state: any) => state.auth);
-  console.log(authSelector)
-  // const dispatch = useDispatch()
-  // useEffect(() => {
-  //   const token = window.localStorage.getItem('token');
-  //   if (token) {
-  //     dispatch(ifUser(true))
-  //   } else {
-  //     dispatch(ifUser(false))
-  //   }
-  // }, [])
 
   return (
-    <div className="App">
+    <div className="App" data-theme={mode? 'dark': 'light'}>
       <div className='overlay'></div>
       <Routes>
         {

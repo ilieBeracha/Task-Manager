@@ -63,5 +63,5 @@
     padding: 4px 7.5px 4px 7.5px;
     background-color: var(--color4);
     border-radius: 10px;
-    color: white;
+    color: var(--color6);
 }

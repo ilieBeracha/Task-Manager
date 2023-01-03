@@ -4,17 +4,17 @@ body {
 }
 
 * {
-  --color1: #EFF5F5;
+  /* --color1: #EFF5F5;
   --color2: #D6E4E5;
   --color3: #497174;
   --color4: #FF725E;
-  --color5: #EB6440;
-  --workLabel:#D6E4E5;
-  --financialLabel:green;
-  --schoolLabel:plum;
-  --personalLabel:rgb(85, 85, 251);
-  --homeLabel:brown;
-  --leisureLabel:salmon;
+  --color5: #EB6440; */
+  --workLabel: black;
+  --financialLabel: green;
+  --schoolLabel: plum;
+  --personalLabel: rgb(85, 85, 251);
+  --homeLabel: brown;
+  --leisureLabel: salmon;
   font-family: 'Anybody', cursive;
   font-family: 'Assistant', sans-serif;
   font-family: 'Epilogue', sans-serif;
@@ -23,4 +23,23 @@ body {
   font-family: 'Roboto', sans-serif;
   font-family: 'Rubik', sans-serif;
   font-family: 'Sora', sans-serif;
+}
+
+.App[data-theme="light"] {
+  --color1: #EFF5F5;
+  --color2: #D6E4E5;
+  --color3: #497174;
+  --color4: #FF725E;
+  --color5: #EB6440;
+  --color6: white
+}
+
+.App[data-theme='dark'] {
+  --color1: #2E2E2E;
+  --color2: #4D4D4D;
+  --color3: #BDBDBD;
+  --color4: #FF725E;
+  --color5: #EB6440;
+  /* --color6: #f1f1f1; */
+  --color6:#dde2e2 ;
 }
