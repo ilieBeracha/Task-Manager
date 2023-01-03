@@ -12,19 +12,23 @@ import "./Main.css";
 import Navbar from "./Navbar/Navbar";
 import Tasks from "./Tasks/Tasks";
 import 'react-toastify/dist/ReactToastify.css';
+import NavbarSmallScreen from "../NavbarSmallScreen/NavbarSmallScreen";
+import Settings from "./Settings/Settings";
 
 function Main(): JSX.Element {
     const tasksSelector = useSelector((state: any) => state.tasks);
     const dispatch = useDispatch();
+    const smallScreen = window.matchMedia("(max-width: 1200px)").matches;
 
 
     async function getTasksIfTasksSelectorIsEmpty() {
-        const sub = await getIdJwt()
-        let res= await apiService.getTasks(sub);
+        const sub = await getIdJwt();
+        console.log(sub)
+        let res = await apiService.getTasks(sub);
         console.log(res)
         dispatch(getTasksRedux(res))
     }
-    
+
     useEffect(() => {
         getTasksIfTasksSelectorIsEmpty()
     }, []);
@@ -32,12 +36,14 @@ function Main(): JSX.Element {
 
     return (
         <div className="Main">
-            <Navbar />
+            {!smallScreen ?
+                <Navbar />
+                : <NavbarSmallScreen />}
             <Routes>
                 <Route path="/" element={<Dashboard />}></Route>
                 <Route path="/board" element={<Tasks />}></Route>
                 <Route path="/backlog" element={<Backlog />}></Route>
-                <Route path="/settings" element={'settings'}></Route>
+                <Route path="/settings" element={<Settings />}></Route>
             </Routes>
         </div>
     );

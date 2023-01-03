@@ -18,7 +18,7 @@ function Tasks(): JSX.Element {
     const tasksSelector = useSelector((state: any) => state.tasks);
     const dispatch = useDispatch();
     const [refreshTasks, setRefreshTasks] = useState<boolean>(false);
-
+    const overlaySelector = useSelector((state:any)=> state.overlay)
 
     useEffect(() => {
         tasksFunctions.getTasks(dispatch, getTasksRedux, setTodo, setInProgress, setCompleted);
@@ -37,6 +37,8 @@ function Tasks(): JSX.Element {
             setCompleted(searchResults.filter((res: any) => res.taskStatus === "completed"));
         }
     }
+
+
 
 
     function onDragEnd(result: DropResult) {
@@ -62,31 +64,31 @@ function Tasks(): JSX.Element {
         let newStatus: string = add.newStatus;
 
         if (destination.droppableId === "TasksTodoDroppable") {
-            const timeStamp = new Date().getTime();            
+            const timeStamp = new Date().getTime();
             newStatus = "todo"
             todoTasks.splice(destination.index, 0, add)
-            updateTaskIndex(add,destination.index,timeStamp,newStatus)
+            updateTaskIndex(add, destination.index, timeStamp, newStatus)
         } else if (destination.droppableId === "TasksInProgressDroppable") {
             const timeStamp = new Date().getTime();
             newStatus = "inProgress"
             inProgressTasks.splice(destination.index, 0, add);
-            updateTaskIndex(add,destination.index,timeStamp,newStatus)
+            updateTaskIndex(add, destination.index, timeStamp, newStatus)
         } else if (destination.droppableId === "TaskCompletedDroppable") {
             const timeStamp = new Date().getTime();
             newStatus = "completed"
             completedTasks.splice(destination.index, 0, add);
-            updateTaskIndex(add,destination.index,timeStamp,newStatus)
+            updateTaskIndex(add, destination.index, timeStamp, newStatus)
         }
 
         setTodo(todoTasks);
         setInProgress(inProgressTasks);
     }
 
-    async function updateTaskIndex(task:TaskModel, index:number,timeStamp:number,newStatus:string){
-        const updatedTask = {...task};
+    async function updateTaskIndex(task: TaskModel, index: number, timeStamp: number, newStatus: string) {
+        const updatedTask = { ...task };
         updatedTask.indexPriority = index;
         updatedTask.indexPriorityTimeStamp = timeStamp;
-        const newTasks =await tasksSelector.filter((t: TaskModel) => {
+        const newTasks = await tasksSelector.filter((t: TaskModel) => {
             return t.id !== updatedTask.id
         })
         updatedTask.taskStatus = newStatus;
@@ -97,6 +99,10 @@ function Tasks(): JSX.Element {
 
     return (
         <div className="Tasks" >
+            {overlaySelector?
+
+                <div id="overlay"></div>
+            :<></>}
             < div className="TasksHeader" >
                 <AddTask setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} />
                 <div className="search-container">
@@ -117,7 +123,7 @@ function Tasks(): JSX.Element {
                                     <div className="TasksDisplayed TasksTodoDiv">
                                         {todo.length < 5 ?
                                             todo.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.id} task={t} />)
-                                            : <div className="TasksDisplayed TasksDisplayedOver3">
+                                            : <div className="TasksDisplayedOver3">
                                                 {todo.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.id} task={t} />)}
 
                                             </div>}
@@ -141,7 +147,7 @@ function Tasks(): JSX.Element {
                                         {
                                             inProgress.length < 5 ?
                                                 inProgress.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.id} task={t} />)
-                                                : <div className="TasksDisplayed TasksDisplayedOver3">
+                                                : <div className="TasksDisplayedOver3">
                                                     {inProgress.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.id} task={t} />)}
                                                 </div>}
                                         {provided.placeholder}
@@ -164,7 +170,7 @@ function Tasks(): JSX.Element {
                                     <div className="TasksDisplayed TasksCompletedDiv">
                                         {completed.length < 5 ?
                                             completed.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.id} task={t} />)
-                                            : <div className="TasksDisplayed TasksDisplayedOver3">
+                                            : <div className="TasksDisplayedOver3">
                                                 {completed.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.id} task={t} />)}
                                             </div>}
                                         {provided.placeholder}

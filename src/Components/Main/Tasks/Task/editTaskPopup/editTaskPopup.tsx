@@ -35,7 +35,7 @@ function EditTaskPopUp({ task, id, refreshTasks, setRefreshTasks }: { task: Task
         setRefreshTasks(!refreshTasks)
         handleClose();
         taskEdit.id = id;
-        await apiService.updateTask(taskEdit)
+        await apiService.updateEditTask(taskEdit)
     }
 
     return (

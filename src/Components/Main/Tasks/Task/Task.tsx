@@ -5,16 +5,30 @@ import "./Task.css";
 import { getIdJwt } from "../../../../Service/getIdJwt";
 import { Draggable } from "react-beautiful-dnd";
 import EditTaskPopUp from "./editTaskPopup/editTaskPopup";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ifUser } from "../../../../app/usersSlice";
 
 function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: { task: TaskModel, index: number, setRefreshTasks: any, refreshTasks: any }): JSX.Element {
-    
+    const [remainingDays, setRemainingDays] = useState<number>();
+
+    useEffect(() => {
+        daysRemaining()
+    }, [])
+
     async function deleteTask() {
         apiService.deleteTask(task.id)
         setRefreshTasks(!refreshTasks)
     }
+
+    async function daysRemaining() {
+        let today = new Date();
+        let taskDate = new Date(task.taskDate);
+        let remainingMilliseconds = taskDate.getTime() - today.getTime();
+        let remainingDays = Math.floor(remainingMilliseconds / 86400000) + 1;
+        setRemainingDays(remainingDays);
+    }
+
 
     return (
         <Draggable draggableId={task.id.toString()} index={index}>
@@ -74,6 +88,7 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
                         }
                         <div className="TaskDate">
                             <span>{task.taskDate}</span> <br />
+                            <span>{remainingDays} days remaining!</span>
                         </div>
                         {task.taskPriority === "High" ?
                             <div className="TaskPriorityDiv TaskBacklogPriority TaskBacklogPriorityHigh">

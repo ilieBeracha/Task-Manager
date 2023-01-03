@@ -74,7 +74,10 @@
 @media screen and (max-width: 1000px) {
     .Navbar {
         display: none;
-        max-width: 100%;
+        /* display: flex; */
+        position:absolute;
+        z-index: 10;
+        max-width: 20%;
         min-height: 10px;
     }
 

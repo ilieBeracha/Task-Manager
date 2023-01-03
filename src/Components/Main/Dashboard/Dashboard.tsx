@@ -8,6 +8,7 @@ import TodayTask from "./TodayTask/TodayTask";
 import { dashBoardFunctions } from "../../../functions/dashboardFunctions";
 import PieChart from "../../PieChart/PieChart";
 import LabelGroup from "./LabelGroup/LabelGroup";
+import { useDispatch } from "react-redux";
 
 
 function Dashboard(): JSX.Element {
@@ -17,6 +18,8 @@ function Dashboard(): JSX.Element {
     const [todayOrWeekTasksState, setTodayOrWeekTasksState] = useState<TaskModel[]>([]);
     const [labelGroup, setLabelGroup] = useState<{ [key: string]: number }>()
     const authSelector = useSelector((state: any) => state.auth)
+    const overlaySelector = useSelector((state: any) => state.overlay);
+
     useEffect(() => {
         dashBoardFunctions.getNames(setGetName);
         dashBoardFunctions.getAvgOfTasksCompleted(tasksSelector, setCompletedTasksAvg);
@@ -26,6 +29,10 @@ function Dashboard(): JSX.Element {
 
     return (
         <div className="Dashboard">
+            {overlaySelector?
+                <div id="overlay"></div>
+            :<></>}
+
             <div className="DashboardMainDiv">
                 <div className="DashboardWelcomeBack">
                     <div className="DashboardWelcomeBackImage">

@@ -108,6 +108,22 @@ class ApiService {
         console.log(response)
         return response;
     }
+    async updateEditTask(task: TaskModel) {
+        let token = getToken()
+        const taskId = task.id
+        const taskStringify = JSON.stringify(task)
+        const response = await axios.put(`http://localhost:3080/users/tasks/edit/${taskId}`,
+            taskStringify,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+            }
+        )
+        console.log(response)
+        return response;
+    }
 }
 
 export const apiService = new ApiService

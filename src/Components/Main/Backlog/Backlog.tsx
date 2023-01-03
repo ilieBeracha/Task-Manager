@@ -8,11 +8,15 @@ import "./Backlog.css";
 import TasksBacklog from "./TasksBacklog/TasksBacklog";
 
 function Backlog(): JSX.Element {
-    const tasksSelector:TaskModel[] = useSelector((state: any) => state.tasks);
-    // const dispatch = useDispatch();
+    const tasksSelector: TaskModel[] = useSelector((state: any) => state.tasks);
+    const overlaySelector = useSelector((state: any) => state.overlay)
 
     return (
         <div className="Backlog">
+            {overlaySelector?
+                <div id="overlay"></div>
+            :<></>}
+
             <div className="BacklogTasksHeader">
                 <h5>All Tasks</h5>
             </div>

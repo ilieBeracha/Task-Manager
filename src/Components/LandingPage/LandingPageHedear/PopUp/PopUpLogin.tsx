@@ -57,17 +57,6 @@ function PopUpLogin() {
     })
   }
 
-  // if (res.ok) {
-  //   const token = await res.json();
-  //   if (token) {
-  //     window.localStorage.setItem('token', token);
-  //     dispatch(ifUser(true));
-  //     return
-  //   }
-  // } else {
-  //   toastMessIncorrectDetails();
-  // }
-
   return (
     <div>
       <button onClick={handleOpen}>Login</button>

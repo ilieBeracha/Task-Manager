@@ -9,6 +9,7 @@ import { UsersModel } from '../../../../model/TaskModel';
 import { apiService } from '../../../../Service/ApiService';
 import { ifUser } from '../../../../app/usersSlice';
 import { useDispatch } from 'react-redux';
+import { login } from '../../../../app/authSlice (1)';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -30,11 +31,13 @@ function PopUpRegister() {
     const handleClose = () => setOpen(false);
 
     async function saveRegisterDetails(user: UsersModel) {
-        await apiService.register(user).then((res) => {
+        await apiService.register(user).then(async (res) => {
             if (res.ok) {
-                dispatch(ifUser(true))
+                let token = await res.json()
+                console.log(token)
+                dispatch(login(token));
             } else {
-                alert('User or Password incorrect')
+                alert('Cant register')
             }
         })
     }
