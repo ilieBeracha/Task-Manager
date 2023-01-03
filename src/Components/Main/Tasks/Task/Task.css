@@ -104,6 +104,15 @@
   font-size: 12px;
 }
 
+#remainingDaySpanOver0{
+  font-weight:300;
+  color: var(--color3);
+}
+#remainingDaySpanUnder0{
+  font-weight:300;
+  color: red;
+}
+
 .TaskLabelWork {
   background-color: var(--workLabel);
   color: var(--color6);
