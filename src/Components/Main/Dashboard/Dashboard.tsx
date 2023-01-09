@@ -19,8 +19,6 @@ function Dashboard(): JSX.Element {
     const [labelGroup, setLabelGroup] = useState<{ [key: string]: number }>()
     const authSelector = useSelector((state: any) => state.auth)
     const overlaySelector = useSelector((state: any) => state.overlay);
-    const [quote,setQuote] = useState<string>();
-    const [quoter,setQuoter] = useState<string>();
 
     useEffect(() => {
         dashBoardFunctions.getNames(setGetName);
@@ -31,9 +29,9 @@ function Dashboard(): JSX.Element {
 
     return (
         <div className="Dashboard">
-            {overlaySelector?
+            {overlaySelector ?
                 <div id="overlay"></div>
-            :<></>}
+                : <></>}
 
             <div className="DashboardMainDiv">
                 <div className="DashboardWelcomeBack">
@@ -80,8 +78,7 @@ function Dashboard(): JSX.Element {
                 </div>
 
                 <div className="DashboardFooter">
-                    <span>{quote}</span>
-                    <h5>{quoter}</h5>
+                  
                 </div>
             </div>
 

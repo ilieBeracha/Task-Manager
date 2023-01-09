@@ -3,6 +3,7 @@ import axios from 'axios';
 import { store } from '../app/store';
 import { ifUser } from "../app/usersSlice";
 import { toast } from "react-toastify";
+import { logout } from "../app/authSlice (1)";
 
 function toastMessSignInAgain() {
     toast.error('Please sign in again', {
@@ -25,8 +26,7 @@ class ApiService {
         axios.interceptors.response.use((response) => response, (error) => {
             if (error.response.status === 401) {
                 toastMessSignInAgain()
-                window.localStorage.removeItem('token');
-                store.dispatch(ifUser(false));
+                store.dispatch(logout);
             }
         });
     }
@@ -58,7 +58,7 @@ class ApiService {
 
     async getTasks(id: number) {
         let token = getToken();
-        const response = await axios.get(`http://localhost:3080/users/tasks/${id}`, {
+        const response = await axios.get(`http://localhost:3080/tasks/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
@@ -70,9 +70,11 @@ class ApiService {
 
 
     async AddNewTask(id: number, taskBody: TaskModel) {
+        console.log(id);
+        
         let token = getToken()
         const taskBodyString = JSON.stringify(taskBody)
-        const response = await axios.post(`http://localhost:3080/users/tasks/add/${id}`, taskBodyString, {
+        const response = await axios.post(`http://localhost:3080/tasks/add/${id}`, taskBodyString, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -82,7 +84,7 @@ class ApiService {
 
     async deleteTask(Taskid: number) {
         let token = getToken()
-        const response = await axios.delete(`http://localhost:3080/users/tasks/delete/${Taskid}`, {
+        const response = await axios.delete(`http://localhost:3080/tasks/delete/${Taskid}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -96,7 +98,7 @@ class ApiService {
         console.log(task.indexPriority)
         const taskId = task.id
         const taskStringify = JSON.stringify(task)
-        const response = await axios.put(`http://localhost:3080/users/tasks/update/${taskId}`,
+        const response = await axios.put(`http://localhost:3080/tasks/update/${taskId}`,
             taskStringify,
             {
                 headers: {
@@ -112,7 +114,7 @@ class ApiService {
         let token = getToken()
         const taskId = task.id
         const taskStringify = JSON.stringify(task)
-        const response = await axios.put(`http://localhost:3080/users/tasks/edit/${taskId}`,
+        const response = await axios.put(`http://localhost:3080/tasks/edit/${taskId}`,
             taskStringify,
             {
                 headers: {

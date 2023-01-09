@@ -38,11 +38,11 @@ function toastMessAddTask() {
 }
 
 function AddTask({ refreshTasks, setRefreshTasks }: any) {
-    const [labels, setLabels] = useState<any>(labelsArr);
-    const [selectedLabel, setSelectedLabel] = useState()
+    // const [labels, setLabels] = useState<any>(labelsArr);
+    // const [selectedLabel, setSelectedLabel] = useState()
+    // const loginSelector = useSelector((state: any) => state.logged);
+    // const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors } } = useForm<TaskModel>();
-    const loginSelector = useSelector((state: any) => state.logged);
-    const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -52,7 +52,10 @@ function AddTask({ refreshTasks, setRefreshTasks }: any) {
         setRefreshTasks(!refreshTasks)
         handleClose();
         toastMessAddTask();
+        task.indexPriorityTimeStamp = new Date().getTime();
         const sub = await getIdJwt();
+        console.log(sub);
+        
         await apiService.AddNewTask(sub, task)
     }
 

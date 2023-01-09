@@ -1,6 +1,7 @@
 body {
   margin: 0;
   height: 100vh;
+  overflow: hidden;
 }
 
 * {
@@ -41,5 +42,5 @@ body {
   --color4: #FF725E;
   --color5: #EB6440;
   /* --color6: #f1f1f1; */
-  --color6:#dde2e2 ;
+  --color6:#c1c5c5 ;
 }
