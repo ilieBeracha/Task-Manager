@@ -8,14 +8,15 @@ import EditTaskPopUp from "./editTaskPopup/editTaskPopup";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ifUser } from "../../../../app/usersSlice";
+import { useSelector } from "react-redux";
 
 function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: { task: TaskModel, index: number, setRefreshTasks: any, refreshTasks: any }): JSX.Element {
     const [remainingDays, setRemainingDays] = useState<number>(0);
-
+        
     useEffect(() => {
         daysRemaining()
     }, [])
-
+    
     async function deleteTask() {
         apiService.deleteTask(task.id)
         setRefreshTasks(!refreshTasks)

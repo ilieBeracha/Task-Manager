@@ -11,6 +11,6 @@ export const store = configureStore({
         tasks: TasksSlice,
         auth:authSlice1,
         overlay: overlaySlice,
-        mode:darkLightModeSlice
+        mode:darkLightModeSlice,
     }
 })

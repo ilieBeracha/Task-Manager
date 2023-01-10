@@ -95,7 +95,7 @@ function AddTask({ refreshTasks, setRefreshTasks }: any) {
                                     <option value="completed">Completed</option>
                                 </select>
 
-                                <button type='submit' className='PopupAddTask'>Add</button>
+                                <button style={{backgroundColor:"#FF725E"}} type='submit' className='PopupAddTask'>Add</button>
                             </div>
                             <div className='popUpTagsDiv'>
                                 <h5>Labels: </h5>

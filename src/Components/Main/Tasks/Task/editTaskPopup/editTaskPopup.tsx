@@ -74,7 +74,7 @@ function EditTaskPopUp({ task, id, refreshTasks, setRefreshTasks }: { task: Task
                                     <option value="inProgress">In Progress</option>
                                     <option value="completed">Completed</option>
                                 </select>
-                                <button type='submit' className='PopupAddTask'>Edit</button>
+                                <button style={{backgroundColor:"#FF725E"}} type='submit' className='PopupAddTask'>Edit</button>
                             </div>
                             <div className='popUpTagsDiv'>
                                 <h5>Labels: </h5>

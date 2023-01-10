@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import './PopUpLogin.css'
@@ -13,6 +12,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { login } from '../../../../app/authSlice (1)';
+import Button from '@mui/material/Button';
+
+
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -57,6 +59,8 @@ function PopUpLogin() {
     })
   }
 
+
+
   return (
     <div>
       <button onClick={handleOpen}>Login</button>
@@ -75,8 +79,13 @@ function PopUpLogin() {
               <label htmlFor="">Username: </label> <br />
               <input type="text" {...register('username')} /> <br />
               <label htmlFor="">Password: </label> <br />
-              <input type="text" {...register('password')} /> <br />
-              <button id='PopupLoginBtn'>Login</button>
+              <input type="password" {...register('password')} /> <br />
+              <div className='Btns'>
+
+                <button style={{backgroundColor:"#FF725E"}} className='PopupBtn'>Login</button>
+              </div>
+              {/* <Button size='small' type='submit' variant="contained">Login</Button> */}
+
             </form>
           </div>
         </Box>

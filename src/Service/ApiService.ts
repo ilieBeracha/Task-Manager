@@ -29,6 +29,8 @@ class ApiService {
                 store.dispatch(logout);
             }
         });
+
+
     }
     async login(user: UsersModel) {
         const userJson = JSON.stringify(user)
@@ -71,7 +73,7 @@ class ApiService {
 
     async AddNewTask(id: number, taskBody: TaskModel) {
         console.log(id);
-        
+
         let token = getToken()
         const taskBodyString = JSON.stringify(taskBody)
         const response = await axios.post(`http://localhost:3080/tasks/add/${id}`, taskBodyString, {
@@ -117,6 +119,7 @@ class ApiService {
         const response = await axios.put(`http://localhost:3080/tasks/edit/${taskId}`,
             taskStringify,
             {
+                method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
@@ -125,6 +128,25 @@ class ApiService {
         )
         console.log(response)
         return response;
+    }
+
+    async searchUserToCollab(username: String) {
+        let token = getToken();
+        const usernameStringify = JSON.stringify(username)
+        console.log(usernameStringify);
+        
+        const response = await axios.post(`http://localhost:3080/users/collab`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: username,
+            mode:'no-cors'
+        })
+
+        console.log(response);
+        return response
     }
 }
 

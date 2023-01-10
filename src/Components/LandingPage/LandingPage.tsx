@@ -1,7 +1,7 @@
 import "./LandingPage.css";
 import LandingPageHedear from "./LandingPageHedear/LandingPageHedear";
 import taskImage from "../../images/tasks.png"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function LandingPage(): JSX.Element {
     const [titleDisplayed, setTitleDisplayed] = useState<[]>([])

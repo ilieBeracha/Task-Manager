@@ -34,6 +34,9 @@ function Navbar(): JSX.Element {
                 <NavLink to={'/backlog'}>
                     <ListAltIcon />
                 </NavLink>
+                <NavLink to={'/collab'}>
+                    Collab
+                </NavLink>
                 <NavLink to={'/settings'}>
                     <SettingsIcon />
                 </NavLink>

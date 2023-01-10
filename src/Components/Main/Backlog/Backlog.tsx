@@ -1,9 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getTasksRedux } from "../../../app/TasksSlice";
+import { useSelector } from "react-redux";
 import { TaskModel } from "../../../model/TaskModel";
-import { apiService } from "../../../Service/ApiService";
-import { getIdJwt } from "../../../Service/getIdJwt";
 import "./Backlog.css";
 import TasksBacklog from "./TasksBacklog/TasksBacklog";
 

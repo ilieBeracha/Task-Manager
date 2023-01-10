@@ -62,12 +62,12 @@ function PopUpRegister() {
                             <label htmlFor="">Last Name: </label> <br />
                             <input type="text" {...register('lastName')} /> <br />
                             <label htmlFor="">Email: </label> <br />
-                            <input type="text" {...register('email')} /> <br />
+                            <input type="email" {...register('email')} /> <br />
                             <label htmlFor="">Username: </label> <br />
                             <input type="text" {...register('username')} /> <br />
                             <label htmlFor="">Password: </label> <br />
-                            <input type="text" {...register('password')} /> <br />
-                            <button id='PopupLoginBtn'>Register</button>
+                            <input type="password" {...register('password')} /> <br />
+                            <button style={{backgroundColor:"#FF725E"}} className='PopupBtn'>Register</button>
                         </form>
                     </div>
                     {/* </Typography> */}

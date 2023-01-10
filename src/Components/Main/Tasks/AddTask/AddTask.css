@@ -52,7 +52,6 @@
 
 .PopUpFormDiv button{
     cursor: pointer;
-    background-color: transparent;
     border: none;
     font-size: 16px;
     padding: 8px 15px 8px 15px;
@@ -62,17 +61,14 @@
 } 
 
 .AddTask button{
-    /* position: absolute; */
     cursor: pointer;
     background-color: var(--color4);
     border: none;
     font-size: 14px;
-    /* padding: 8px 15px 8px 15px; */
     color: var(--color6);
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 5px;
-    /* bottom: 15px; */
 }
 
 
@@ -104,7 +100,6 @@
 
 .PopUpFormDiv button{
     cursor: pointer;
-    background-color: transparent;
     border: none;
     font-size: 16px;
     padding: 8px 15px 8px 15px;

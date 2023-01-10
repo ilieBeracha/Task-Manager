@@ -1,0 +1,59 @@
+.Collab {
+	width: 100%;
+    height: 100%;
+}
+
+
+.CollabSearchUsers{
+    width: 100%;
+    height: 10%;
+}
+
+.CollabDisplaySearchedUsers{
+    width: 100%;
+    /* height: 90%; */
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    justify-content: center;
+    /* justify-content: space-around; */
+    /* align-items: flex-start; */
+    gap: 50px;
+}
+
+.Collab .CollabSearchUsers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    align-items: center;
+}
+
+.Collab .CollabSearchUsers input[type="text"] {
+    width: 70%;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px 0 0 5px;
+}
+
+.Collab .CollabSearchUsers button[type="submit"] {
+    border: none;
+    outline: none;
+    background-color: rgb(147, 139, 139);
+    color: #fff;
+    font-size: 1em;
+    padding: 10px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.Collab .CollabSearchUsers button[type="submit"]:hover {
+    background-color: #333;
+}
+
+.Collab .CollabSearchUsers button[type="submit"]:active {
+    background-color: #666;
+}
