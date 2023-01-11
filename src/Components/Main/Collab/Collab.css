@@ -17,9 +17,11 @@
 .CollabRequestsDiv {
     width: 25%;
     height: 100%;
-    background-color: var(--color2);
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
+    background-color: var(--color6);
+    /* border-top-left-radius: 50px; */
+    /* border-bottom-left-radius: 50px; */
+    box-shadow: 4px 8px 20px rgba(0, 0, 0, 0.2);
+
 }
 
 .CollabDisplaySearchedUsers {
@@ -45,7 +47,7 @@
 .CollabRequestsDivList{
     width: 100%;
     height: 85%;
-    background-color: var(--color2);
+    background-color: var(--color6);
     border-bottom-left-radius: 50px;
     border-top: 3px solid var(--color4);
 }

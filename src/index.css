@@ -44,3 +44,11 @@ body {
   /* --color6: #f1f1f1; */
   --color6:#c1c5c5 ;
 }
+
+h1,h2,h3,h4,h5,h6{
+  color: var(--color3);
+}
+
+button{
+  color: var(--color6);
+}

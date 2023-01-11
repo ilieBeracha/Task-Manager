@@ -21,7 +21,7 @@ function Dashboard(): JSX.Element {
     const [labelGroup, setLabelGroup] = useState<{ [key: string]: number }>()
     const authSelector = useSelector((state: any) => state.auth)
     const overlaySelector = useSelector((state: any) => state.overlay);
-    const [chatGptTasks, setChatGptTasks] = useState<string>('')
+    const [chatGptTasks, setChatGptTasks] = useState<string>()
     const { register, handleSubmit } = useForm<any>()
 
 
@@ -95,7 +95,7 @@ function Dashboard(): JSX.Element {
                     <div className="chatGptInput">
                         <h5>Random task generator:  </h5>
                         <form onSubmit={handleSubmit(handleSubmitChat)} action="">
-                            <select className="select" id=""{...register('query')}>
+                            <select className="select_component" id=""{...register('query')}>
                                 <option value="Work">Work</option>
                                 <option value="Personal">Personal</option>
                                 <option value="Home">Home</option>
@@ -103,14 +103,15 @@ function Dashboard(): JSX.Element {
                                 <option value="Financial">Financial</option>
                                 <option value="Leisure">Leisure</option>
                             </select>
-                            <button type="submit">Send</button>
+                            <button style={{backgroundColor:"#FF725E"}} type="submit">Send</button>
                         </form>
                     </div>
 
                     <div className="chatGptResponseDiv">
                         {
+                            chatGptTasks!==undefined?
                             <p>{chatGptTasks}</p>
-                        }
+                        :<p id="chatGptPreviewMessage">- Based on Chat Gpt, by Open Ai -</p>}
 
                     </div>
                 </div>
