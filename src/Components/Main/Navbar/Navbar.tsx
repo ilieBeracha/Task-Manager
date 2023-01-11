@@ -10,6 +10,7 @@ import { ifUser } from "../../../app/usersSlice";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import DnsIcon from '@mui/icons-material/Dns';
 import { logout } from "../../../app/authSlice (1)";
+import WorkspacesIcon from '@mui/icons-material/Workspaces';
 function Navbar(): JSX.Element {
     const smallScreen = window.matchMedia("(max-width: 1200px)").matches;
     const dispatch = useDispatch();
@@ -35,7 +36,7 @@ function Navbar(): JSX.Element {
                     <ListAltIcon />
                 </NavLink>
                 <NavLink to={'/collab'}>
-                    Collab
+                    <WorkspacesIcon />
                 </NavLink>
                 <NavLink to={'/settings'}>
                     <SettingsIcon />

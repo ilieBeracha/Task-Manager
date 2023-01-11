@@ -9,6 +9,8 @@ import { dashBoardFunctions } from "../../../functions/dashboardFunctions";
 import PieChart from "../../PieChart/PieChart";
 import LabelGroup from "./LabelGroup/LabelGroup";
 import { useDispatch } from "react-redux";
+import { apiService } from "../../../Service/ApiService";
+import { useForm } from "react-hook-form";
 
 
 function Dashboard(): JSX.Element {
@@ -19,13 +21,25 @@ function Dashboard(): JSX.Element {
     const [labelGroup, setLabelGroup] = useState<{ [key: string]: number }>()
     const authSelector = useSelector((state: any) => state.auth)
     const overlaySelector = useSelector((state: any) => state.overlay);
+    const [chatGptTasks, setChatGptTasks] = useState<string>('')
+    const { register, handleSubmit } = useForm<any>()
+
 
     useEffect(() => {
+
         dashBoardFunctions.getNames(setGetName);
         dashBoardFunctions.getAvgOfTasksCompleted(tasksSelector, setCompletedTasksAvg);
         dashBoardFunctions.getTodayTasks(tasksSelector, setTodayOrWeekTasksState);
         dashBoardFunctions.getLabelsGroup(tasksSelector, setLabelGroup);
     }, [tasksSelector, authSelector]);
+
+
+    async function handleSubmitChat(query: string) {
+        setChatGptTasks('')
+        await apiService.randomTaskGeneratorOpenAi(query).then(async (res) => {
+            setChatGptTasks(res)
+        })
+    }
 
     return (
         <div className="Dashboard">
@@ -78,7 +92,27 @@ function Dashboard(): JSX.Element {
                 </div>
 
                 <div className="DashboardFooter">
-                  
+                    <div className="chatGptInput">
+                        <h5>Random task generator:  </h5>
+                        <form onSubmit={handleSubmit(handleSubmitChat)} action="">
+                            <select className="select" id=""{...register('query')}>
+                                <option value="Work">Work</option>
+                                <option value="Personal">Personal</option>
+                                <option value="Home">Home</option>
+                                <option value="School">School</option>
+                                <option value="Financial">Financial</option>
+                                <option value="Leisure">Leisure</option>
+                            </select>
+                            <button type="submit">Send</button>
+                        </form>
+                    </div>
+
+                    <div className="chatGptResponseDiv">
+                        {
+                            <p>{chatGptTasks}</p>
+                        }
+
+                    </div>
                 </div>
             </div>
 

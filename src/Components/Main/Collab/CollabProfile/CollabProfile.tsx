@@ -15,7 +15,7 @@ export default function CollabProfile({ user }: { user: UsersModel }) {
                 row
                 sx={{
                     width: 320,
-                    height: 90,
+                    height: 80,
                     gap: 2,
                     backgroundColor: 'white',
                     border: 'none',
@@ -33,7 +33,7 @@ export default function CollabProfile({ user }: { user: UsersModel }) {
                 </AspectRatio>
                 <div>
                     <Typography level="h2" fontSize="lg" id="card-description" mb={0.5}>
-                        {`${user.username}`}
+                        <b> {`@${user.username}`}</b>
                     </Typography>
                     <Typography fontSize="sm" aria-describedby="card-description" mb={1}>
                         <Link

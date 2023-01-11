@@ -1,15 +1,28 @@
 .Collab {
-	width: 100%;
+    width: 100%;
     height: 100%;
+    display: flex;
 }
 
 
-.CollabSearchUsers{
+.CollabSearchUsers {
     width: 100%;
     height: 10%;
 }
 
-.CollabDisplaySearchedUsers{
+.CollabMain {
+    width: 75%;
+}
+
+.CollabRequestsDiv {
+    width: 25%;
+    height: 100%;
+    background-color: var(--color2);
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+.CollabDisplaySearchedUsers {
     width: 100%;
     /* height: 90%; */
     display: flex;
@@ -19,6 +32,22 @@
     /* justify-content: space-around; */
     /* align-items: flex-start; */
     gap: 50px;
+}
+
+.CollabRequestsDivHeader{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.CollabRequestsDivList{
+    width: 100%;
+    height: 85%;
+    background-color: var(--color2);
+    border-bottom-left-radius: 50px;
+    border-top: 3px solid var(--color4);
 }
 
 .Collab .CollabSearchUsers {

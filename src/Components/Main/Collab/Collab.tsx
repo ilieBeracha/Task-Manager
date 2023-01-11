@@ -20,18 +20,32 @@ function Collab(): JSX.Element {
 
     return (
         <div className="Collab">
-            <div className="CollabSearchUsers">
-                <input onInput={(e) => searchUser(e)} type="text" placeholder="Search users to collab..." />
-                <button type="submit">Search</button>
+
+            <div className="CollabMain">
+
+                <div className="CollabSearchUsers">
+                    <input onInput={(e) => searchUser(e)} type="text" placeholder="Search users to collab..." />
+                    <button type="submit">Search</button>
+                </div>
+
+                <div className="CollabDisplaySearchedUsers">
+                    {
+                        users ?
+                            users.map((u: UsersModel) => (
+                                <CollabProfile key={u.id} user={u} />
+                            ))
+                            : <></>}
+                </div>
             </div>
 
-            <div className="CollabDisplaySearchedUsers">
-                {
-                    users ?
-                        users.map((u: UsersModel) => (
-                            <CollabProfile key={u.id} user={u} />
-                        ))
-                        : <></>}
+            <div className="CollabRequestsDiv">
+                <div className="CollabRequestsDivHeader">
+                    <h2>Friend requests: </h2>
+                </div>
+
+                <div className="CollabRequestsDivList">
+                    
+                </div>
             </div>
         </div>
     );

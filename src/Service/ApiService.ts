@@ -134,7 +134,7 @@ class ApiService {
         let token = getToken();
         const usernameStringify = JSON.stringify(username)
         console.log(usernameStringify);
-        
+
         const response = await axios.post(`http://localhost:3080/users/collab`, {
             method: "POST",
             headers: {
@@ -142,12 +142,31 @@ class ApiService {
                 'Authorization': `Bearer ${token}`,
             },
             body: username,
-            mode:'no-cors'
+            mode: 'no-cors'
         })
 
         console.log(response);
         return response
     }
+
+    async randomTaskGeneratorOpenAi(query: any) {
+        console.log(query.query);
+        
+        let token = getToken();
+        const response = await axios.post(`http://localhost:3080/openai`, {
+            method: "POST",
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: query.query,
+            mode: 'no-cors',
+        })
+        console.log(response)
+        return response.data;
+    }
+
 }
 
 export const apiService = new ApiService

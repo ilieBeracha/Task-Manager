@@ -120,7 +120,8 @@
 .DashboardFooter {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* flex-direction: column; */
+    /* justify-content: center; */
     /* text-align: center; */
     align-items: center;
     width: 100%;
@@ -206,7 +207,31 @@
     align-items: center;
 }
 
+.chatGptInput {
+    width: 100%;
+    height: 50%;
+    background-color: var(--color2);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
 
+}
+
+.chatGptInput h5 {
+    margin: 0;
+}
+
+.chatGptResponseDiv {
+    display: flex;
+    justify-content: space-evenly;
+
+    width: 100%;
+    height: 50%;
+    /* background-color: antiquewhite; */
+}
 
 @media screen and (max-width: 1200px) {
     .Dashboard {
