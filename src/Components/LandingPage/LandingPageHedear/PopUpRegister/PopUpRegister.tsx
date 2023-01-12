@@ -43,7 +43,7 @@ function PopUpRegister() {
     }
     return (
         <div>
-            <button onClick={handleOpen}>Register</button>
+            <button style={{color:'#497174'}}  onClick={handleOpen}>Register</button>
             <Modal
                 open={open}
                 onClose={handleClose}

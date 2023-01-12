@@ -30,7 +30,8 @@
 }
 
 .PopUpFormDiv form select{
-    margin-bottom: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
 }
 
 /* .PopUpFormDiv form{
@@ -48,6 +49,9 @@
 .popUpTagsDiv{
     height: 100%;
     width: 30%;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: space-between; */
 }
 
 .PopUpFormDiv button{

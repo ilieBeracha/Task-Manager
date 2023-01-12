@@ -63,7 +63,7 @@ function PopUpLogin() {
 
   return (
     <div>
-      <button onClick={handleOpen}>Login</button>
+      <button style={{color:'#497174'}} className='LogInButton' onClick={handleOpen}>Login</button>
       <Modal
         open={open}
         onClose={handleClose}

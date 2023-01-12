@@ -103,7 +103,7 @@ function Dashboard(): JSX.Element {
                                 <option value="Financial">Financial</option>
                                 <option value="Leisure">Leisure</option>
                             </select>
-                            <button style={{backgroundColor:"#FF725E"}} type="submit">Send</button>
+                            <button style={{backgroundColor:"#FF725E"}} type="submit">Generate</button>
                         </form>
                     </div>
 

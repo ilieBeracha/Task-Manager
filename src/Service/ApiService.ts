@@ -151,9 +151,9 @@ class ApiService {
 
     async randomTaskGeneratorOpenAi(query: any) {
         console.log(query.query);
-        
+
         let token = getToken();
-        const response = await axios.post(`http://localhost:3080/openai`, {
+        const response = await axios.post(`http://localhost:3080/openai/task`, {
             method: "POST",
 
             headers: {
@@ -167,6 +167,56 @@ class ApiService {
         return response.data;
     }
 
+    async imageGeneratorOpenAi(content: any) {
+        // console.log(query);
+
+        let token = getToken();
+        const response = await axios.post(`http://localhost:3080/openai/image`, {
+            method: "POST",
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: content,
+            mode: 'no-cors',
+        })
+        console.log(response)
+        return response.data;
+    }
+
+    async saveImageToDB(url: string, id: number) {
+        let token = getToken();
+        const response = await axios.post(`http://localhost:3080/openai/image/save/${id}`, {
+            method: "POST",
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: url,
+            mode: 'no-cors',
+        })
+        console.log(response)
+        return response.data;
+    }
+
+    async deleteImageFromDB(id: number) {
+        let token = getToken();
+        const response = await axios.delete(`http://localhost:3080/openai/image/delete/${id}`, {
+            method: "DELETE",
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            // mode: 'no-cors',
+        })
+        return response.data;
+    }
+
 }
+
+
 
 export const apiService = new ApiService

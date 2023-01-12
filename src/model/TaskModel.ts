@@ -20,6 +20,7 @@ export interface TaskModel{
     id:number,
     taskStatus: string,
     indexPriority:number,
-    indexPriorityTimeStamp:number
+    indexPriorityTimeStamp:number,
+    imageUrl:string
 }
 

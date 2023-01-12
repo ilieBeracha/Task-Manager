@@ -1,6 +1,7 @@
 import "./LandingPage.css";
 import LandingPageHedear from "./LandingPageHedear/LandingPageHedear";
 import taskImage from "../../images/tasks.png"
+// import taskManager from "../../images/taskManager-landingPage.png"
 import { useState } from "react";
 
 function LandingPage(): JSX.Element {
@@ -26,6 +27,11 @@ function LandingPage(): JSX.Element {
                     <img src={taskImage} alt="" />
                 </div>
             </div>
+
+{/* 
+            <div className="">
+                <img src={taskManager} alt="" />
+            </div> */}
         </div>
     );
 }

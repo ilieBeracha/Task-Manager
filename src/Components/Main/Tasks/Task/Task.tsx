@@ -9,14 +9,17 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ifUser } from "../../../../app/usersSlice";
 import { useSelector } from "react-redux";
+import DallE from "./DallE/DallE";
 
 function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: { task: TaskModel, index: number, setRefreshTasks: any, refreshTasks: any }): JSX.Element {
     const [remainingDays, setRemainingDays] = useState<number>(0);
-        
+    const [visibleImg, setVisibleImg] = useState<boolean>(false);
+    const imagesSelector = useSelector((state: any) => state.showOrHideImages)
+
     useEffect(() => {
         daysRemaining()
     }, [])
-    
+
     async function deleteTask() {
         apiService.deleteTask(task.id)
         setRefreshTasks(!refreshTasks)
@@ -30,6 +33,10 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
         setRemainingDays(remainingDays);
     }
 
+    function showImage() {
+        setVisibleImg(!visibleImg)
+    }
+
 
     return (
         <Draggable draggableId={task.id.toString()} index={index}>
@@ -41,6 +48,9 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
                         </div>
                         <div className='editTaskDiv'>
                             <EditTaskPopUp refreshTasks={refreshTasks} setRefreshTasks={setRefreshTasks} id={task.id} task={task} />
+                        </div>
+                        <div className="addImageDiv">
+                            <DallE task={task} refreshTasks={refreshTasks} setRefreshTasks={setRefreshTasks}/>
                         </div>
                         <div className="TaskName">
                             <h5>{task.taskName}</h5>
@@ -84,6 +94,18 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
                                                             <span>{task.label}</span>
                                                         </div>
                         }
+
+                        <div onClick={showImage} className="TaskImage">
+                            {/* {visibleImg!==false?
+
+                                <img src={task.imageUrl} alt="" />
+                            :<></>} */}
+                            {
+                                task.imageUrl && imagesSelector?
+                                <img src={task.imageUrl} alt="" />
+
+                            :<></>}
+                        </div>
                         <div className="TaskContent">
                             <span>{task.taskContent}</span>
                         </div>
@@ -93,7 +115,7 @@ function Task({ task = {} as TaskModel, index, setRefreshTasks, refreshTasks }: 
 
                                 <span id="remainingDaySpanOver0">{remainingDays} days left</span>
                                 :
-                                 <span id="remainingDaySpanUnder0">{remainingDays} days behind</span>
+                                <span id="remainingDaySpanUnder0">{remainingDays} days behind</span>
                             }
                         </div>
                         {task.taskPriority === "High" ?

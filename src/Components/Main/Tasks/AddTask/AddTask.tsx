@@ -82,6 +82,10 @@ function AddTask({ refreshTasks, setRefreshTasks }: any) {
                                 <input required type="text" {...register('taskContent')} /> <br />
                                 <label htmlFor="">Date: </label> <br />
                                 <input required type="date" {...register('taskDate')} /> <br />
+                                
+                                <button style={{backgroundColor:"#FF725E"}} type='submit' className='PopupAddTask'>Add</button>
+                            </div>
+                            <div className='popUpTagsDiv'>
                                 <label htmlFor="">Priority: </label> <br />
                                 <select {...register('taskPriority')} id="">
                                     <option value="High">High</option>
@@ -94,11 +98,7 @@ function AddTask({ refreshTasks, setRefreshTasks }: any) {
                                     <option value="inProgress">In Progress</option>
                                     <option value="completed">Completed</option>
                                 </select>
-
-                                <button style={{backgroundColor:"#FF725E"}} type='submit' className='PopupAddTask'>Add</button>
-                            </div>
-                            <div className='popUpTagsDiv'>
-                                <h5>Labels: </h5>
+                                <label>Labels: </label>
                                 <select id=""{...register('label')}>
                                     <option value="Work">Work</option>
                                     <option value="Personal">Personal</option>

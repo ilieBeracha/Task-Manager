@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getTasksRedux } from "../../../app/TasksSlice";
 import { tasksFunctions } from "../../../functions/tasksFunctions";
+import { showOrHide } from "../../../app/HideImagesSlice";
 
 function Tasks(): JSX.Element {
     const [todo, setTodo] = useState<TaskModel[]>([])
@@ -18,10 +19,13 @@ function Tasks(): JSX.Element {
     const tasksSelector = useSelector((state: any) => state.tasks);
     const dispatch = useDispatch();
     const [refreshTasks, setRefreshTasks] = useState<boolean>(false);
-    const overlaySelector = useSelector((state:any)=> state.overlay)
+    const overlaySelector = useSelector((state: any) => state.overlay)
+    const imagesSelector = useSelector((state: any) => state.showOrHideImages)
 
     useEffect(() => {
         tasksFunctions.getTasks(dispatch, getTasksRedux, setTodo, setInProgress, setCompleted);
+        console.log(imagesSelector);
+
     }, [refreshTasks]);
 
     async function searchTasks(event: any) {
@@ -97,17 +101,29 @@ function Tasks(): JSX.Element {
         await apiService.updateTask(updatedTask);
     }
 
+    function showOrHideImages() {
+        dispatch(showOrHide())
+    }
+
     return (
         <div className="Tasks" >
-            {overlaySelector?
+            {overlaySelector ?
 
                 <div id="overlay"></div>
-            :<></>}
+                : <></>}
             < div className="TasksHeader" >
+                <div className="ShowOrHideImagesDiv">
+                    {imagesSelector ?
+
+                        <button onClick={showOrHideImages}>Hide Images</button>
+                        : <button onClick={showOrHideImages}>Show Images</button>
+                    }
+                </div>
                 <AddTask setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} />
                 <div className="search-container">
                     <input onChange={(e) => searchTasks(e)} type="text" placeholder="Search tasks..." />
                     <button type="submit">Search</button>
+
                 </div>
             </div >
             <DragDropContext onDragEnd={onDragEnd}>
@@ -121,12 +137,9 @@ function Tasks(): JSX.Element {
                                         <h5>To Do</h5>
                                     </div>
                                     <div className="TasksDisplayed TasksTodoDiv">
-                                        {todo.length < 5 ?
+                                        {
                                             todo.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.id} task={t} />)
-                                            : <div className="TasksDisplayedOver3">
-                                                {todo.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.id} task={t} />)}
-
-                                            </div>}
+                                        }
                                         {provided.placeholder}
                                     </div>
                                 </div>
@@ -145,11 +158,8 @@ function Tasks(): JSX.Element {
 
                                     <div className="TasksDisplayed TaksInProgressDiv">
                                         {
-                                            inProgress.length < 5 ?
-                                                inProgress.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.id} task={t} />)
-                                                : <div className="TasksDisplayedOver3">
-                                                    {inProgress.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.id} task={t} />)}
-                                                </div>}
+                                            inProgress.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.id} task={t} />)
+                                        }
                                         {provided.placeholder}
                                     </div>
 
@@ -168,11 +178,9 @@ function Tasks(): JSX.Element {
                                     </div>
 
                                     <div className="TasksDisplayed TasksCompletedDiv">
-                                        {completed.length < 5 ?
+                                        {
                                             completed.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.id} task={t} />)
-                                            : <div className="TasksDisplayedOver3">
-                                                {completed.map((t, index) => <Task setRefreshTasks={setRefreshTasks} refreshTasks={refreshTasks} index={index} key={t.id} task={t} />)}
-                                            </div>}
+                                        }
                                         {provided.placeholder}
                                     </div>
                                 </div>

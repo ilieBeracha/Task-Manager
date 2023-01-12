@@ -62,6 +62,9 @@ function EditTaskPopUp({ task, id, refreshTasks, setRefreshTasks }: { task: Task
                                 <input defaultValue={task.taskContent} required type="text" {...register('taskContent')} /> <br />
                                 <label htmlFor="">Date: </label> <br />
                                 <input defaultValue={task.taskDate} required type="date" {...register('taskDate')} /> <br />
+                                <button style={{ backgroundColor: "#FF725E" }} type='submit' className='PopupAddTask'>Edit</button>
+                            </div>
+                            <div className='popUpTagsDiv'>
                                 <label htmlFor="">Priority: </label> <br />
                                 <select defaultValue={task.taskPriority} {...register('taskPriority')} id="">
                                     <option value="High">High</option>
@@ -74,10 +77,7 @@ function EditTaskPopUp({ task, id, refreshTasks, setRefreshTasks }: { task: Task
                                     <option value="inProgress">In Progress</option>
                                     <option value="completed">Completed</option>
                                 </select>
-                                <button style={{backgroundColor:"#FF725E"}} type='submit' className='PopupAddTask'>Edit</button>
-                            </div>
-                            <div className='popUpTagsDiv'>
-                                <h5>Labels: </h5>
+                                <label>Labels: </label>
                                 <select defaultValue={task.label} id=""{...register('label')}>
                                     <option value="Work">Work</option>
                                     <option value="Personal">Personal</option>

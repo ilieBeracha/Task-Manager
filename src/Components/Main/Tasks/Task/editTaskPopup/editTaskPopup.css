@@ -4,6 +4,7 @@
 
 .editTaskPopup button{
     background-color: transparent;
+    color: black;
     border: none;
     padding: 0;
     cursor: pointer;
